@@ -39,9 +39,6 @@ git_ps1_branch() {
 export PS1=$'[\[\e[35;1m\w\e[0m\]]$(git_ps1_branch)\n~> '
 PROMPT_DIRTRIM=4
 
-# config management
-alias config='/usr/bin/git --git-dir=$HOME/.rjh/ --work-tree=$HOME'
-
 # NVM
 export NVM_DIR="$HOME/.nvm"
 ifThenSource $NVM_DIR/nvm.sh
