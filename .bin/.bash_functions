@@ -1,13 +1,13 @@
 # rjh .bash_functions
 
 # print messages neatly when called from within a bash function
-function log() {
+log() {
   # FUNCNAME[0] would be "log", so go for the caller function
   echo "[${FUNCNAME[1]}] $1"
 }
 
 # make a file or directory into a tarball
-function tarball() {
+tarball() {
 
   [ $# -eq 0 ] && log "no arguments supplied." && return 1;
 
@@ -52,7 +52,9 @@ extract() {
 }
 
 # make a directory, and cd into it
-cmkdir() { mkdir -p $1 && cd $1 }
+cmkdir() {
+  mkdir -p $1 && cd $1
+}
 
 # make a directory, and move * into it
 mkmv() {
@@ -61,10 +63,10 @@ mkmv() {
 }
 
 # get my IP address from various internet sources
-function myip {
-  ican_ip=$(curl -s -f icanhazip.com)
-  ipch_ip=$(curl -s -f ipecho.net/plain)
-  idnt_ip=$(curl -s -f ident.me)
+myip() {
+  local ican_ip=$(curl -s -f icanhazip.com)
+  local ipch_ip=$(curl -s -f ipecho.net/plain)
+  local idnt_ip=$(curl -s -f ident.me)
   echo -e "[myip] IP addresses (various sources):"
   echo -e "[icanhazip] \u2192 $ican_ip"
   echo -e "[ipechonet] \u2192 $ipch_ip"
