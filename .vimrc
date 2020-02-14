@@ -2,6 +2,7 @@
 
 se ml
 syn on
+se bs=2
 se ai si
 se tf lz
 se fo-=q
