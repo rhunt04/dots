@@ -6,8 +6,8 @@
 
 # if a file exists, source it
 ifThenSource() { [ -s "$1" ] && . "$1" ;}
-ifThenSource ~/.bash_aliases
-ifThenSource ~/.bash_functions
+ifThenSource ~/.bin/.bash_aliases
+ifThenSource ~/.bin/.bash_functions
 ifThenSource ~/.bin/.machine_specifics
 
 ifThenPath() { [ -d "$1" ] && export PATH="$1:$PATH" ;}

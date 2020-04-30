@@ -1,13 +1,20 @@
-# rjh .bash_functions
+#!/bin/bash
+# Ryan's bash functions file
 
-# print messages neatly when called from within a bash function
-log() {
-  # FUNCNAME[0] would be "log", so go for the caller function
+# *{{ log
+
+function log() {
+  # Print messages neatly when called from within a bash function.
+
+  # FUNCNAME[0] would be "log", so go for the caller function.
   echo "[${FUNCNAME[1]}] $1"
 }
 
-# make a file or directory into a tarball
-tarball() {
+# }}*
+
+# *{{ general purpose tarball maker
+function tarball() {
+  # Make a file or directory into a tarball.
 
   [ $# -eq 0 ] && log "no arguments supplied." && return 1;
 
@@ -25,8 +32,11 @@ tarball() {
   log "done tarring." && return 0;
 }
 
-# extract a variety of archives 
+# }}*
+
+# *{{ general purpose file extractor
 extract() {
+  # Extract a variety of archives.
 
   [ $# -eq 0 ] && log "no arguments supplied." && return 1;
   [ ! -f "$1" ] && log "file \"$1\" doesn't exist." && return 1;
@@ -51,24 +61,37 @@ extract() {
 
 }
 
-# make a directory, and cd into it
+# }}*
+
+# *{{ make and cd
 cmkdir() {
+  # Make a directory, and cd into it.
+
   mkdir -p $1 && cd $1
 }
 
-# make a directory, and move * into it
+# }}*
+
+# *{{ make and move
 mkmv() {
+  # Make a directory, and move * into it.
+
   mkdir -p $1
   find . -maxdepth 1 -not -path . -not -name $1 -exec mv {} $1 \;
 }
 
-# get my IP address from various internet sources
-myip() {
-  local ican_ip=$(curl -s -f icanhazip.com)
-  local ipch_ip=$(curl -s -f ipecho.net/plain)
-  local idnt_ip=$(curl -s -f ident.me)
+# }}*
+
+# *{{ ip addresses
+function myip {
+  # Get my IP address from various internet sources.
+  ican_ip=$(curl -s -f icanhazip.com)
+  ipch_ip=$(curl -s -f ipecho.net/plain)
+  idnt_ip=$(curl -s -f ident.me)
   echo -e "[myip] IP addresses (various sources):"
   echo -e "[icanhazip] \u2192 $ican_ip"
   echo -e "[ipechonet] \u2192 $ipch_ip"
   echo -e "[ident.me]  \u2192 $idnt_ip"
 }
+
+# }}*
