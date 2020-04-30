@@ -1,18 +1,13 @@
 #!/bin/bash
 # Ryan's bash functions file
 
-# *{{ log
-
 function log() {
   # Print messages neatly when called from within a bash function.
 
-  # FUNCNAME[0] would be "log", so go for the caller function.
+  # FUNCNAME[0] would be "log", so go for the caller function, one-level up.
   echo "[${FUNCNAME[1]}] $1"
 }
 
-# }}*
-
-# *{{ general purpose tarball maker
 function tarball() {
   # Make a file or directory into a tarball.
 
@@ -32,9 +27,6 @@ function tarball() {
   log "done tarring." && return 0;
 }
 
-# }}*
-
-# *{{ general purpose file extractor
 extract() {
   # Extract a variety of archives.
 
@@ -61,18 +53,12 @@ extract() {
 
 }
 
-# }}*
-
-# *{{ make and cd
 cmkdir() {
   # Make a directory, and cd into it.
 
   mkdir -p $1 && cd $1
 }
 
-# }}*
-
-# *{{ make and move
 mkmv() {
   # Make a directory, and move * into it.
 
@@ -80,9 +66,6 @@ mkmv() {
   find . -maxdepth 1 -not -path . -not -name $1 -exec mv {} $1 \;
 }
 
-# }}*
-
-# *{{ ip addresses
 function myip {
   # Get my IP address from various internet sources.
   ican_ip=$(curl -s -f icanhazip.com)
@@ -94,4 +77,3 @@ function myip {
   echo -e "[ident.me]  \u2192 $idnt_ip"
 }
 
-# }}*
