@@ -1,0 +1,8 @@
+#!/bin/sh
+# RJH: a script for seshing tmux.
+
+session="le_sesh"
+file="-f $HOME/.config/tmux/.tmux.conf"
+
+# If a tmux session "the_sesh" exists, attach to it. Otherwise, start it.
+tmux ${file} attach -t "$session" || tmux ${file} new -s "$session"
