@@ -7,6 +7,7 @@ se ai si
 se tf lz
 se fo-=q
 se smc=90
+se shm+=I
 se sb spr
 se nu rnu
 se lbr wrap
