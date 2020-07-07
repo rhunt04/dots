@@ -16,7 +16,7 @@ se nu rnu
 se lbr nowrap
 se nocp t_RV=
 se fcs+=vert:│
-se et ts=2 ls=2
+se et ts=2 ls=2 sw=2
 se vi+=n~/.vim/vi
 se cb=unnamedplus
 se nowb nobk noswf
