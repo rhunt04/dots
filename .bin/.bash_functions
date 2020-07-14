@@ -77,3 +77,20 @@ function myip {
   echo -e "[ident.me]  \u2192 $idnt_ip"
 }
 
+function boomerise {
+  #sed -E 's/(.)(.)?/\U\1\L\2/g' <<< $@
+
+  if (( $# == 0 )) ; then
+    sed -E 's/(.)(.)?/\U\1\L\2/g' < /dev/stdin
+  else
+    sed -E 's/(.)(.)?/\U\1\L\2/g' <<< $@
+  fi
+}
+
+function light {
+  cat ~/.bin/sequences_solarized_light
+}
+
+function dark {
+  cat ~/.cache/wal/sequences
+}

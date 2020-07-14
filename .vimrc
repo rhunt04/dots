@@ -58,5 +58,6 @@ fu! Fsz()
   retu printf('%.2gkB)',abs(0.001*getfsize(expand(@%))))
 endf
 
+hi StatusLine ctermbg=1 ctermfg=3
 se stl=\ %f%M%R)\ \%{Fsz()}\ \%{IsP()}\%=\(\c%v\ (\%p%%\ "
 
