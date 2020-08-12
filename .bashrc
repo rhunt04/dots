@@ -26,9 +26,10 @@ shopt -s autocd
 shopt -s extglob
 
 # PS1
+pwr() { echo -e "-[\e[33;1m$(cat /sys/class/power_supply/BAT0/capacity)%\e[0m]" ;}
 git_ps1() { bn=$(git symbolic-ref --short -q HEAD 2>/dev/null) &&
-                    echo -e "-[\e[32;1m$bn\e[0m]" ;}
-export PS1=$'[\[\e[35;1m\w\e[0m\]]$(git_ps1)\n $ '
+  echo -e "-[\e[32;1m$bn\e[0m]" ;}
+export PS1=$'[\[\e[35;1m\w\e[0m\]]$(git_ps1)$(pwr)\n $ '
 PROMPT_DIRTRIM=4
 
 # NVM

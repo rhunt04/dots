@@ -8,6 +8,17 @@ function log() {
   echo "[${FUNCNAME[1]}] $1"
 }
 
+function backupImage() {
+  # Check disk exists, check not mounted, check have space ...
+  sudo dd bs=4M if=/dev/mmcblk0 | gzip > /home/ryan/BackupImage`date +%d%m%y`.gz
+}
+
+function writeImage() {
+  # Check disk exists, check not mounted, ...
+  #unzip -p <imageFile>.zip | sudo dd of=/dev/mmcblk0 bs=4M conv=fsync status=progress
+  echo "Finish me."
+}
+
 function tarball() {
   # Make a file or directory into a tarball.
 
@@ -29,7 +40,6 @@ function tarball() {
 
 extract() {
   # Extract a variety of archives.
-
   [ $# -eq 0 ] && log "no arguments supplied." && return 1;
   [ ! -f "$1" ] && log "file \"$1\" doesn't exist." && return 1;
 
@@ -55,13 +65,11 @@ extract() {
 
 cmkdir() {
   # Make a directory, and cd into it.
-
   mkdir -p $1 && cd $1
 }
 
 mkmv() {
   # Make a directory, and move * into it.
-
   mkdir -p $1
   find . -maxdepth 1 -not -path . -not -name $1 -exec mv {} $1 \;
 }

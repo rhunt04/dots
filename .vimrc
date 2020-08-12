@@ -16,19 +16,19 @@ se nu rnu
 se lbr nowrap
 se nocp t_RV=
 se fcs+=vert:│
-se et ts=2 ls=2 sw=2
 se vi+=n~/.vim/vi
 se cb=unnamedplus
 se nowb nobk noswf
-se list lcs=tab:\│\ ,trail:%
+se et ts=2 ls=2 sw=2
 set whichwrap+=<,>,[,]
+se list lcs=tab:\│\ ,trail:%
 "se sbr=~ " not showing wraps...
 
 hi CursorLine cterm=NONE
-hi CursorLineNr ctermbg=3 ctermfg=1 cterm=bold
+hi CursorLineNr ctermbg=7 ctermfg=5 cterm=bold
 au ColorScheme * hi VertSplit cterm=NONE ctermfg=white
 
-hi ExtraWhitespace cterm=bold ctermfg=white
+hi ExtraWhitespace cterm=bold ctermfg=5
 match ExtraWhitespace /\s\+$/
 
 let g:netrw_banner = 0
@@ -44,7 +44,7 @@ se pt=<leader>p
 nn <leader>t :%s/\s\+$//e<CR>
 nn <leader>wp Vapgq
 nn <C-Left> :tabp<CR>
-nn <C-Right> :tabN<CR>
+nn <C-Right> :tabn<CR>
 nn <leader>h :se hls! hls?<CR>
 vn <C-r> "ry:%s/<C-r>r//gc<C-f>3h<C-c>
 
@@ -58,6 +58,5 @@ fu! Fsz()
   retu printf('%.2gkB)',abs(0.001*getfsize(expand(@%))))
 endf
 
-hi StatusLine ctermbg=1 ctermfg=3
+hi StatusLine ctermbg=5 ctermfg=7
 se stl=\ %f%M%R)\ \%{Fsz()}\ \%{IsP()}\%=\(\c%v\ (\%p%%\ "
-

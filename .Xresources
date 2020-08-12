@@ -12,7 +12,7 @@ xterm*faceSize10: 50
 xterm*renderFont: true
 xterm*cursorBlink: true
 xterm*trimSelection: true
-xterm*faceName: Fira\ Mono:antialias=true
+xterm*faceName: Monaco:antialias=true
 xterm*selectToClipboard: true
 xterm*highlightSelection: true
 
