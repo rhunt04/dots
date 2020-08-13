@@ -21,15 +21,16 @@ se cb=unnamedplus
 se nowb nobk noswf
 se et ts=2 ls=2 sw=2
 set whichwrap+=<,>,[,]
-se list lcs=tab:\│\ ,trail:%
+se list lcs=tab:\│\ "
 "se sbr=~ " not showing wraps...
 
 hi CursorLine cterm=NONE
-hi CursorLineNr ctermbg=7 ctermfg=5 cterm=bold
+hi CursorLineNr ctermfg=5 cterm=BOLD
 au ColorScheme * hi VertSplit cterm=NONE ctermfg=white
 
-hi ExtraWhitespace cterm=bold ctermfg=5
-match ExtraWhitespace /\s\+$/
+hi ExtraWhitespace ctermfg=2 ctermbg=1
+" Highlight only last space. Saves lcs 'trail' chars looking ugly.
+match ExtraWhitespace /\s\{1}$/
 
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
@@ -48,7 +49,10 @@ nn <C-Right> :tabn<CR>
 nn <leader>h :se hls! hls?<CR>
 vn <C-r> "ry:%s/<C-r>r//gc<C-f>3h<C-c>
 
-cal matchadd('ColorColumn','\%81v',1)
+" Highlight any actual char beyond 80. Don't highlight when a char is next to
+" line 81, but still on line 80.
+hi ColorColumn ctermbg=1 ctermfg=0
+cal matchadd('ColorColumn','\%81v.',100)
 
 fu! IsP()
   if &paste|retu 'p)'|el|retu ''|en
@@ -58,5 +62,5 @@ fu! Fsz()
   retu printf('%.2gkB)',abs(0.001*getfsize(expand(@%))))
 endf
 
-hi StatusLine ctermbg=5 ctermfg=7
+hi StatusLine term=NONE cterm=BOLD ctermfg=5
 se stl=\ %f%M%R)\ \%{Fsz()}\ \%{IsP()}\%=\(\c%v\ (\%p%%\ "
