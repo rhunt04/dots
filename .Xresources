@@ -13,7 +13,7 @@ xterm*renderFont: true
 xterm*cursorBlink: true
 xterm*cursorColor: *XtDefaultForeground
 xterm*trimSelection: true
-xterm*faceName: Input Mono:antialias=true
+xterm*faceName: Fira Code:antialias=true
 xterm*selectToClipboard: true
 xterm*highlightSelection: true
 

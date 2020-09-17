@@ -21,18 +21,35 @@ bind "set completion-ignore-case on"
 bind '"\e[B": history-search-forward'
 bind '"\e[A": history-search-backward'
 
+# disable bash default C-S search (it's crap...)
+bind -r '\C-s'
+# turn off xon/xoff toggle.
+stty -ixon
+
 # shopts
 shopt -s autocd
 shopt -s extglob
 
+# prevent search annoyance
+export HISTCONTROL=ignoreboth:erasedups
+
 # PS1
-pwr() { echo -e "-[\e[33;1m$(cat /sys/class/power_supply/BAT0/capacity)%\e[0m]" ;}
+#pwr() { echo -e "-[\e[33;1m$(cat /sys/class/power_supply/BAT0/capacity)%\e[0m]" ;}
 git_ps1() { bn=$(git symbolic-ref --short -q HEAD 2>/dev/null) &&
   echo -e "-[\e[32;1m$bn\e[0m]" ;}
-export PS1=$'[\[\e[35;1m\w\e[0m\]]$(git_ps1)$(pwr)\n $ '
+#export PS1=$'[\[\e[35;1m\w\e[0m\]]$(git_ps1)$(pwr)\n $ '
+export PS1=$'[\[\e[35;1m\w\e[0m\]]$(git_ps1)\n $ '
 PROMPT_DIRTRIM=4
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
 ifThenSource "${NVM_DIR}"/nvm.sh
 ifThenSource "${NVM_DIR}"/bash_completion
+
+
+echo
+echo "  Tmux config:"
+echo
+echo "    C-S-<dir>              : navigate splits"
+echo "    C-B -> hold C -> <dir> : resize splits"
+echo

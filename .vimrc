@@ -42,10 +42,11 @@ nn : ;
 nn ; :
 nn vw viw
 se pt=<leader>p
-nn <leader>t :%s/\s\+$//e<CR>
+no <silent> <C-S> :update<CR>
 nn <leader>wp Vapgq
 nn <C-Left> :tabp<CR>
 nn <C-Right> :tabn<CR>
+nn <leader>t :%s/\s\+$//e<CR>
 nn <leader>h :se hls! hls?<CR>
 vn <C-r> "ry:%s/<C-r>r//gc<C-f>3h<C-c>
 

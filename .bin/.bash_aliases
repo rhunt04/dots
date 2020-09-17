@@ -6,7 +6,7 @@ alias ll='ls -l'
 alias lla='ll -a'
 alias grep='grep --color=auto'
 alias sudo='sudo -p "$(tput setaf 3)[sudo] pwd → $(tput sgr0)"'
-alias update='sudo apt-get update && sudo apt-get upgrade'
+alias update='sudo apt update && sudo apt upgrade'
 
 # stupid tmux...
 alias tmux="tmux -f ~/.config/tmux/.tmux.conf"
