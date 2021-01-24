@@ -18,7 +18,7 @@ devStr="Logitech USB Trackball"
 # Only run the important commands if mouse detected
 if xinput list | grep -lq "${devStr}"; then
 
-  xinput set-prop "${devStr}" "libinput Accel Speed" 1.0
+  xinput set-prop "${devStr}" "libinput Accel Speed" 1
   xinput set-int-prop "${devStr}" "Evdev Wheel Emulation" 8 1
   xinput set-int-prop "${devStr}" "Evdev Wheel Emulation Button" 8 8
 

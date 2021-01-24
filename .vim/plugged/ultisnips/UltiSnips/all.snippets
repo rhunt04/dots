@@ -1,0 +1,19 @@
+snippet date "Date"
+`date +%d/%m/%Y`
+endsnippet
+
+snippet time "Time"
+`date +%T`
+endsnippet
+
+snippet epoch "Unix epoch"
+`date +%s`
+endsnippet
+
+snippet box "Box"
+`!p snip.rv = '┌' + '─' * (len(t[1]) + 2) + '┐'`
+│ $1 │
+`!p snip.rv = '└' + '─' * (len(t[1]) + 2) + '┘'`
+$0
+endsnippet
+

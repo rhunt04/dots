@@ -15,7 +15,7 @@ handleArgs() {
         RUN="true";;
 
       *)
-        usage "unhandled flag: '${1}'."
+        usage "rofirun: unhandled flag -> '${1}'."
         exit 1;;
 
     esac;
@@ -26,9 +26,10 @@ handleArgs() {
 }
 handleArgs "${@}"
 
-[[ -z $RUN && -z $WIN ]] && { echo "Not doing anything (neither)"; exit 1; }
-[[ ! -z $RUN && ! -z $WIN ]] && { echo "Not doing anything (both)"; exit 1; }
+[[ -z $RUN && -z $WIN ]] && { echo "Error (neither arg supplied)"; exit 1; }
+[[ ! -z $RUN && ! -z $WIN ]] && { echo "Error (both args supplied)"; exit 1; }
 
+# Get wal color variables.
 sc="${HOME}/.cache/wal/colors.sh"
 [ -s "${sc}" ] && source "${sc}"
 
@@ -42,6 +43,7 @@ if [ ! -z "$RUN" ]; then
 elif [ ! -z "$WIN" ]; then
 
   #echo "FILLING WITH WIN"
+  # Count windows - dynamically size the rofi window to hold them.
   wins=$(xlsclients -a | wc -l)
   cmd+=" window -location 2 -width 1000 -yoffset 30 -show-icons -lines $wins"
   cmd+=" -display-window \"$ Window\""
@@ -55,7 +57,7 @@ conf+=" -color-window \"$background, $foreground, $color0\""
 conf+=" -color-normal"
 conf+=" \"$background, $foreground, $background, $background, $color4\""
 conf+=" -color-active"
-conf+=" \"$background, $background, $background, $background, $color4\""
+conf+=" \"$background, $color3, $background, $background, $color4\""
 
 cmd+=$conf
 eval "$cmd"

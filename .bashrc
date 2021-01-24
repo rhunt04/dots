@@ -34,22 +34,12 @@ shopt -s extglob
 export HISTCONTROL=ignoreboth:erasedups
 
 # PS1
-#pwr() { echo -e "-[\e[33;1m$(cat /sys/class/power_supply/BAT0/capacity)%\e[0m]" ;}
 git_ps1() { bn=$(git symbolic-ref --short -q HEAD 2>/dev/null) &&
   echo -e "-[\e[32;1m$bn\e[0m]" ;}
-#export PS1=$'[\[\e[35;1m\w\e[0m\]]$(git_ps1)$(pwr)\n $ '
 export PS1=$'[\[\e[35;1m\w\e[0m\]]$(git_ps1)\n $ '
 PROMPT_DIRTRIM=4
 
 # NVM
-export NVM_DIR="$HOME/.nvm"
+export NVM_DIR="${HOME}/.nvm"
 ifThenSource "${NVM_DIR}"/nvm.sh
 ifThenSource "${NVM_DIR}"/bash_completion
-
-
-echo
-echo "  Tmux config:"
-echo
-echo "    C-S-<dir>              : navigate splits"
-echo "    C-B -> hold C -> <dir> : resize splits"
-echo
