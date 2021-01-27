@@ -18,6 +18,7 @@ se ml
 syn on
 se cul
 se bs=2
+se wmnu
 se ai si
 se tf lz
 se fo-=q
