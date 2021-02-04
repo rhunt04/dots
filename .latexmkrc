@@ -21,4 +21,4 @@ $pdflatex = 'pdflatex --interaction=nonstopmode -file-line-error';
 $pdf_previewer = 'zathura';
 
 # Extra remove files:
-$clean_ext = 'synctex.gz nav run.xml snm %R-blx.bib bbl';
+$clean_ext = 'synctex.gz nav run.xml snm %R-blx.bib bbl vrb';
