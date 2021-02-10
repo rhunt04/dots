@@ -1,0 +1,72 @@
+# Stuff to display: filtered versions of feeds.
+# # "ALL UNREAD" is a bit pointless.
+# "query:Unread:unread = \"yes\""
+"[ Main     ] "
+"query:News:tags # \"news\""
+"query:Science:tags # \"sci\""
+"query:Computing:tags # \"comp\""
+"query:Miscellaneous:tags # \"msc\""
+"[ Research ] "
+"query:ALL Papers:tags # \"papers\""
+"query:RD Papers:(tags # \"papers\") and ((title =~ \"radiation damage\") or (content =~ \"radiation damage\"))"
+"query:MD Papers:(tags # \"papers\") and ((title =~ \"molecular dynamics\") or (content =~ \"molecular dynamics\"))"
+"query:QMC Papers:(tags # \"papers\") and ((title =~ \"quantum Monte Carlo\") or (content =~ \"quantum Monte Carlo\"))"
+
+# News
+https://metro.co.uk/news/world/feed/ "!Metro" "news"
+https://www.theguardian.com/world/rss "!Guardian" "news"
+https://feeds.bbci.co.uk/news/world/rss.xml "!BBC" "news"
+https://feeds.skynews.com/feeds/rss/world.xml "!Sky" "news"
+https://feeds.reuters.com/reuters/UKWorldNews "!Reuters" "news"
+https://www.independent.co.uk/news/world/rss "!Independent" "news"
+
+# Science
+https://terrytao.wordpress.com/feed/ "!T. Tao" "sci"
+https://thiscondensedlife.wordpress.com/feed/ "!This Cond. Life" "sci"
+http://feeds.feedburner.com/PhysicsWorldNews?format=xml "!Phys. World" "sci"
+http://condensedconcepts.blogspot.com/feeds/posts/default "!Cond. Conc." "sci"
+
+# Papers
+https://www.nature.com/nmat.rss "!NMat" "papers"
+https://www.nature.com/nphys.rss "!NPhys" "papers"
+https://arxiv.org/rss/cond-mat "!cond-mat" "papers"
+http://feeds.aps.org/rss/recent/prl.xml "!PRL" "papers"
+http://feeds.aps.org/rss/recent/rmp.xml "!RMP" "papers"
+http://feeds.aps.org/rss/recent/prb.xml "!PRB" "papers"
+http://feeds.aps.org/rss/recent/pre.xml "!PRE" "papers"
+http://feeds.nature.com/srep/rss/current "!SciRep" "papers"
+http://feeds.aps.org/rss/recent/prresearch.xml "!PRR" "papers"
+https://aip.scitation.org/feed/jcp/most-recent "!JCP" "papers"
+http://feeds.aps.org/rss/recent/prmaterials.xml "!PRM" "papers"
+https://iopscience.iop.org/journal/rss/0953-8984 "!JPCC" "papers"
+https://science.sciencemag.org/rss/current.xml "!Science" "papers"
+http://rss.sciencedirect.com/publication/science/00219991 "!JCPhys" "papers"
+https://onlinelibrary.wiley.com/action/showFeed?jc=1096987x&type=etoc&feed=rss "!jcchem" "papers"
+# Special: feeds from aggregated searches
+https://pubmed.ncbi.nlm.nih.gov/rss/search/14yXSIREv9VN-UGS0t5qB1qFloDM-zSKy8EXob-odrOVh6mQfT/?limit=15&utm_campaign=pubmed-2&fc=20210120042700 "!PubMed*" "papers"
+
+# Computing
+https://www.raspberrypi.org/rss/ "!RPi" "comp"
+https://fossforce.com/feed/ "!FOSSforce" "comp"
+https://www.unixmen.com/feed/ "!Unixmen" "comp"
+https://stackabuse.com/rss/ "!Stackabuse" "comp"
+https://lukesmith.xyz/rss.xml "!L. Smith" "comp"
+https://newsboat.org/news.atom "!Newsboat" "comp"
+https://www.fluentcpp.com/feed/ "!FluentCPP" "comp"
+http://feeds.feedburner.com/linuxtoday/linux "!LT" "comp"
+https://www.raspberrypi-spy.co.uk/feed/ "!RPi-spy" "comp"
+http://planet.kernel.org/rss20.xml "!planet.kernel" "comp"
+https://isocpp.org/blog/rss/category/news "!isoCPP" "comp"
+http://lxer.com/module/newswire/headlines.rss "!LXer" "comp"
+https://www.cyberciti.biz/atom/updated.xml "!NixCraft" "comp"
+http://jakevdp.github.io/feeds/all.atom.xml "!Jake VdP" "comp"
+http://feeds.feedburner.com/theendeavour "!John D. Cook" "comp"
+https://thepihut.com/blogs/raspberry-pi-roundup.atom "!PiHut" "comp"
+http://feeds.feedburner.com/WalkingRandomly "!Walking Randomly" "comp"
+http://shape-of-code.coding-guidelines.com/feed/ "!Shape of Code" "comp"
+#https://www.reddit.com/r/raspberry_pi/.rss?format=xml "!r/RPi" "comp" "reddit"
+#https://www.reddit.com/r/programming/.rss?format=xml "!r/prog.." "comp" "reddit"
+
+# Misc blogs
+https://michaelrosenblog.blogspot.com/rss.xml "!M. Rosen" "msc"
+
