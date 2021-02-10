@@ -1,5 +1,3 @@
 #!/bin/sh
-
-src=$(cat /sys/class/power_supply/BAT[0-1]/capacity)
-
-printf "%s%%" "$src"
+# Dead simple: print battery quickly
+echo -n "$(cat /sys/c*s/po*y/B*[0-1]/c*y)%"

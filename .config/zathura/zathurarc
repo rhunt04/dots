@@ -1,1 +1,36 @@
-/home/ryan/Dropbox/git_repos/dotfiles/zathurarc
+# ryan's zathurarc
+
+# *{{ general settings
+set page-padding 5
+set smooth-scroll true
+set font Fira\ Code\ 10
+set adjust-open best-fit
+set show-scrollbars false
+set statusbar-basename true
+set window-title-basename true
+set selection-clipboard clipboard
+# }}*
+
+# *{{ key mappings
+# this is vim-like (;, :) swapping
+# (doesn't legitimately swap, but works for the important case)
+unmap :
+map ; focus_inputbar ":"
+
+# next / prev maps
+map <Right> navigate next
+map <Left> navigate previous
+
+# rotate maps
+map <A-Right> rotate rotate-cw
+map <A-Left> rotate rotate-ccw
+
+# fit page to window
+map f adjust_window width
+
+# zooming
+map i zoom in
+# don't use open dialog, remap to useful action
+unmap o
+map o zoom out
+# }}*
