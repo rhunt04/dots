@@ -1,11 +1,12 @@
 # Generics
-text-width 120
+text-width 80
 auto-reload yes
 reload-time 120
 confirm-exit no
 reload-threads 100
 cleanup-on-quit yes
 ignore-mode "display"
+refresh-on-startup yes
 prepopulate-query-feeds yes
 display-article-progress yes
 feedhq-show-special-feeds no
@@ -16,8 +17,6 @@ browser "google-chrome --incognito %u"
 ignore-article "*" "title =~ \"Sponsor\"
 ignore-article "*" "title =~ \"Advertisement\"
 
-macro r pipe-to /home/ryan/.scripts/parsing_newsboat.sh
-
 # Formats
 help-title-format "Help"
 itemview-title-format "%T"
@@ -26,26 +25,26 @@ selecttag-title-format "Select Tag"
 selectfilter-title-format "Select Filter"
 searchresult-title-format "Search Results"
 
-articlelist-format "%D%?T? %-10T ?%-80t"
+articlelist-format "%D%?T? > %-3T > ?%t"
 articlelist-title-format "%T - [%u/%t unread]"
 
 feedlist-format " %-20t %u\ "
-feedlist-title-format "Ryan's Feeds"
-
+feedlist-title-format " Ryan's Feeds"
 # Colours
-color info               color3  default bold
-color article            color4  default
-color background         default default
-color listnormal         color4  default
-color listfocus          default color3
-color listfocus_unread   default color3  bold
-color listnormal_unread  color4  default bold
+color info               color3 default bold
+color article            color4 default
+color background         color9 default
+color listfocus          color0 color2
+color listfocus_unread   color0 color2  bold
+color listnormal         color5 default
+color listnormal_unread  color5 default bold
+color end-of-text-marker color3 default dim
 
 # Highlights
-highlight article "http(s?)://[^ ]+" color3 default bold protect
-highlight article "^(Feed|Title|Link|Date|Author):.*$" color2 default
+highlight article "http(s?)://[^ ]+" color3 default dim
+highlight article "^(Feed|Title|Link|Date|Author):.*$" color2 default dim
 
 # Hacky way to create "section"
-highlight feedlist "^ \\[.*\\] " color2 default bold
-# Can't remove this... Odd bug?
-highlight feedlist "[ ]*\\(0/0\\)" color2 default invis
+highlight feedlist "^.*(\\[.*\\]|[ ]{20})[ ]*" color2 default bold
+highlight feedlist "\\(0/0\\)[ ]*" color0 default
+

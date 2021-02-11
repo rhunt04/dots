@@ -33,7 +33,7 @@ se lbr nowrap
 se nocp t_RV=
 se fcs+=vert:│
 "se vi=                " dont write viminfo file
-"se vi+=n~/.vim/vi     " write inside ~/.vim/vi
+se vi+=n~/.vim/vi     " write inside ~/.vim/vi
 se cb=unnamedplus
 se nowb nobk noswf
 se et ts=2 ls=2 sw=2
