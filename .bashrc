@@ -6,7 +6,6 @@
 
 # if a file exists, source it
 ifThenSource() { [ -s "$1" ] && . "$1" ;}
-ifThenSource ~/.bin/.fzf.bash # fuzzy finder
 ifThenSource ~/.bin/.bash_aliases
 ifThenSource ~/.bin/.bash_functions
 ifThenSource ~/.bin/.machine_specifics
