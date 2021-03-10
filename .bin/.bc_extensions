@@ -1,0 +1,315 @@
+/*
+
+   ____                    _       ____   ____
+  |  _ \ _   _  __ _ _ __ ( )___  | __ ) / ___|
+  | |_) | | | |/ _` | '_ \|// __| |  _ \| |
+  |  _ <| |_| | (_| | | | | \__ \ | |_) | |___
+  |_| \_\\__, |\__,_|_| |_| |___/ |____/ \____|
+         |___/
+
+  -- Functions and constants(*)
+
+  (*) source: CODATA recommended list (2014) [Mohr2016]
+
+  Appropriate BibTeX Entry:
+  =========================
+
+   @article{Mohr2016,
+   title={{CODATA recommended values of the fundamental physical constants:
+   2014}},
+   author={Mohr, P. J. and Newell, D. B. and Taylor, B. N.},
+   journal={{Journal of Physical and Chemical Reference Data}},
+   volume={45},
+   number={4},
+   pages={043102},
+   year={2016},
+   publisher={NIST}
+   }
+
+*/
+
+/* *{{ Constants */
+
+scale        =   50                        /* set scale outrageously high */
+
+/* some masses: */
+
+mp           =   1.672621898*10^(-27)      /* p+ rest mass [kg] */
+mn           =   1.674927471*10^(-27)      /* n0 rest mass [kg] */
+me           =   9.10938356*10^(-31)       /* e- rest mass [kg] */
+mpmev        =   938.2720813               /* p+ rest mass [MeV] */
+mnmev        =   939.5654133               /* n0 rest mass [MeV] */
+memev        =   0.5109989461              /* e- rest mass [MeV] */
+
+/* general constants: */
+
+c            =   299792458                 /* speed of light in vacuum [m/s] */
+h            =   6.626070040*10^(-34)      /* Planck's constant [Js] */
+hbar         =   1.054571800*10^(-34)      /* h divided by 2*pi [Js] */
+kb           =   1.38064852*10^(-23)       /* Boltzmann constant [J/K] */
+ec           =   1.6021766208*10^(-19)     /* e- charge [C] */
+na           =   6.022140857*10^23         /* Avogadro no. [1/mol] */
+epsilon0     =   8.854187817*10^(-12)      /* permitt. of vacuum [C^2/Jm] */
+mu0          =   12.566370614*10^(-7)      /* permeab. of vacuum [T^2*m^3/J] */
+alpha        =   7.2973525664*10^(-3)      /* fine structure constant */
+mub          =   927.4009994*10^(-24)      /* Bohr magneton [J/T] */
+mun          =   5.050783699*10^(-27)      /* nuclear magneton [J/T] */
+ge           =   -2.00231930436182         /* free e- g factor */
+gammae       =   1.760859644*10^(11)       /* free e- gyro. ratio in [T/s] */
+mue          =   -9.284764620*10^(-24)     /* e- magnetic moment */
+mup          =   1.4106067873*10^(-26)     /* proton magnetic moment [J/T] */
+amu          =   1.660539040*10^(-27)      /* atomic mass unit [kg] */
+a0           =   5.2917721067*10^(-11)     /* Bohr radius [m] */
+bohr         =   5.2917721067*10^(-11)     /* Bohr radius [m] */
+re           =   2.8179403227*10^(-15)     /* e- radius [m] */
+gh           =   5.585694702               /* p+ g factor (Lande) */
+big_g        =   6.67408*10^(-11)          /* big G [m^3/kg*s^2] */
+g            =   9.80665                   /* acc. due to gravity [m/s^2] */
+lambdac      =   2.4263102367*10^(-12)     /* compton wavelength of e- [m] */
+au2_to_cm2   =   (a0*100)^(2)
+
+/* Planck units: */
+
+mpl          =   2.176470*10^(-8)          /* Planck mass [kg] */
+lpl          =   1.616229*10^(-35)         /* Planck length [m] */
+tpl          =   5.39116*10^(-44)          /* Planck time [s] */
+temppl       =   1.416808*10^(32)          /* Planck temp. [K] */
+
+/* Ryan's specialties: */
+
+au_to_ang    =   5.2917721067*10^(-1)      /* AU to ang conversion */
+ang_to_au    =   (1/au_to_ang)             /* <reciprocal measure> */
+au_to_ev     =   27.21138602               /* AU to eV conversion */
+pcm_to_ev    =   1.2398419739*10^(-4)      /* /cm to eV conversion */
+ev_to_au     =   (1/au_to_ev)              /* <reciprocal measure> */
+au_to_mev    =   au_to_ev*1000             /* AU to meV conversion */
+mev_to_au    =   (1/au_to_mev)             /* <reciprocal measure> */
+
+/* }}* */
+
+/* *{{ Functions */
+
+/* Mathematical constants */
+
+pi = 4 * a(1)   /* pi = 4 * arctan(1) */
+e = e(1)        /* e = exp(1) */
+
+/* Trigonometric functions */
+
+define sin(x) {
+  return ( s(x) )
+}
+
+define cos(x) {
+  return ( c(x) )
+}
+
+define atan(x) {
+  return ( a(x) )
+}
+
+define tan(x) {
+  return ( s(x) / c(x) )
+}
+
+define asin(x) {
+  if ( x ==  1 ) return (  pi / 2 )
+  if ( x == -1 ) return ( -pi / 2 )
+  return ( a(x / sqrt(1 - (x*x))) )
+}
+
+define acos(x) {
+  if ( x ==  1 ) return( 0 )
+  if ( x == -1 ) return( pi )
+  return ( pi / 2 - a(x / sqrt(1 - (x*x))) )
+}
+
+define cot(x) {
+  return ( c(x) / s(x) )
+}
+
+define acot(x) {
+  return( pi / 2 - a(x) )
+}
+
+define sec(x) {
+  return ( 1 / c(x) )
+}
+
+define cosec(x) {
+  return ( 1 / s(x) )
+}
+
+define csc(x) {
+  return ( 1 / s(x) )
+}
+
+define asec(x) {
+  return ( acos(1 / x) )
+}
+
+define acosec(x) {
+  return ( asin(1 / x) )
+}
+
+define acsc(x) {
+  return ( asin(1 / x) )
+}
+
+define sinh(x) {
+  return ( (e(x) - e(-x)) / 2 )
+}
+
+define cosh(x) {
+  return ( (e(x) + e(-x)) / 2 )
+}
+
+define tanh(x) {
+  return ( (e(x) - e(-x)) / (e(x) + e(-x)) )
+}
+
+define coth(x) {
+  return ( (e(x) + e(-x)) / (e(x) - e(-x)) )
+}
+
+define asinh(x) {
+  return ( l(x + sqrt(x*x + 1)) )
+}
+
+define acosh(x) {
+  return ( l(x + sqrt(x*x - 1)) )
+}
+
+define atanh(x) {
+  return ( ( l(1 + x) - l(1 - x) ) / 2 )
+}
+
+define acoth(x) {
+  return ( atanh(1 / x) )
+}
+
+define sech(x) {
+  return ( 1 / cosh(x) )
+}
+
+define cosech(x) {
+  return ( 1 / sinh(x) )
+}
+
+define csch(x) {
+  return ( 1 / sinh(x) )
+}
+
+define asech(x) {
+  return ( acosh(1 / x) )
+}
+
+define acosech(x) {
+  return ( asinh(1 / x) )
+}
+
+define acsch(x) {
+  return ( asinh(1 / x) )
+}
+
+/* Exponential functions*/
+
+define ln(x) {
+  return ( l(x) )
+}
+
+define log(x) {
+  return ( l(x) / l(10) )
+}
+
+define log2(x) {
+  return ( l(x) / l(2) )
+}
+
+define pow(x, y) {
+  return ( e(y * l(x)) )
+}
+
+/* Number theoretic functions*/
+
+define abs(n) {
+  if ( n < 0 ) return( -n )
+  return (n)
+}
+
+define mod(a, b) {
+  auto c, tmp_scale
+  tmp_scale = scale( sqrt(2) )
+  scale = 0
+  c = a % b
+  scale = tmp_scale
+  if ( a >= 0 ) return ( c )
+  if ( c == 0 ) return ( 0 )
+  return ( c + b )
+}
+
+define f(n) {
+  if ( n <= 1 ) return (1);
+  return ( f(n - 1) * n );
+}
+
+define factorial(n) {
+  return ( f(n) )
+}
+
+define gcd(m, n) {
+  auto a, b, c
+  a = abs(m)
+  if ( n == 0 ) return(a)
+  b = abs(n)
+  c = mod(a, b)
+  while ( c > 0 ) {
+    a = b
+    b = c
+    c = mod(a, b)
+  }
+  return (b)
+}
+
+define lcm(a, b) {
+  auto g
+  g = gcd(a, b)
+  if ( g == 0 ) return(0)
+  return ( abs(a * b) / g )
+}
+
+/* Random niceties */
+
+define bessel(n, x) {
+  return ( j(n, x) )
+}
+
+define aus(mu, eps) {
+  return ( ( mu * au_to_mev ) / ( eps * eps ) )
+}
+
+define quad(a, b) {
+  return sqrt(a^2 + b^2)
+}
+
+define quad3(a, b, c) {
+  return sqrt(a^2 + b^2 + c^2)
+}
+
+define floor(x) {
+  auto s, f
+  s = scale
+  scale = 0
+  f = x / 1
+  scale = s
+  return f
+}
+
+define ceil(x) {
+  return floor(x + 1)
+}
+
+/* }}* */
+
+/* Make user aware...*/
+print "(.bc_extensions loaded)\n"

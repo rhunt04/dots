@@ -13,6 +13,7 @@ ifThenSource ~/.bin/.machine_specifics
 ifThenPath() { [ -d "$1" ] && export PATH="$1:$PATH" ;}
 ifThenPath ~/.bin
 ifThenPath ~/.scripts
+ifThenPath ~/.local/bin
 
 # bash binds
 bind "set show-all-if-ambiguous on"

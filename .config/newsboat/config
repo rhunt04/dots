@@ -38,7 +38,7 @@ color listfocus          color0 color2
 color listfocus_unread   color0 color2  bold
 color listnormal         color5 default
 color listnormal_unread  color5 default bold
-color end-of-text-marker color3 default dim
+# color end-of-text-marker color3 default dim
 
 # Highlights
 highlight article "http(s?)://[^ ]+" color3 default dim

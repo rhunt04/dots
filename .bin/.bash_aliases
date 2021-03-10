@@ -26,3 +26,4 @@ alias vba='vim ~/.bin/.bash_aliases'
 alias vbf='vim ~/.bin/.bash_functions'
 
 alias config='/usr/bin/git --git-dir=$HOME/.rjh/ --work-tree=$HOME'
+alias ius='ssh -4X huntr3@ius.lancs.ac.uk'

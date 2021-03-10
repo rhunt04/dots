@@ -1,34 +1,27 @@
-" rjh .vimrc
+" rjh init.vim
 
-" get vim-plug yourself
-if empty(glob('~/.vim/autoload/plug.vim'))
-  sil !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+" auto-install vim-plug
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  sil !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
   \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   au VimEnter * PlugInstall
 endif
 
-call plug#begin('~/.vim/plugged')
-  Plug 'sirver/ultisnips'
-  Plug 'dracula/vim', {'as':'dracula'}
+call plug#begin('~/.config/nvim/plugged')
+  Plug 'dracula/vim', { 'as': 'dracula' }
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
+se guicursor=
+
 filet plugin indent off
-
-let g:UltiSnipsExpandTrigger = '<tab>'
-let g:UltiSnipsJumpForwardTrigger = '<tab>'
-let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
-
-" LaTeX snippets
-let g:tex_flavor = "latex"
-
-colorscheme dracula
-
 se ml
 syn on
 se cul
 se bs=2
 se wmnu
 "se noai nosi
+se nohls
 se tf lz
 se fo-=q
 se smc=90
@@ -41,8 +34,8 @@ nn <space> za
 se lbr nowrap
 se nocp t_RV=
 se fcs+=vert:│
-"se vi=                " dont write viminfo file
-se vi+=n~/.vim/vi     " write inside ~/.vim/vi
+"se vi=                      " dont write viminfo file
+se vi+=n~/.config/nvim/nvi   " write inside ~/.config/nvim/vi
 se cb=unnamedplus
 se nowb nobk noswf
 se et ts=2 ls=2 sw=2
@@ -111,10 +104,9 @@ se stl=%#finfo#
 se stl+=\ %f%M%R\ %#sinfo#   " hl group for file
 se stl+=\ %{Fsz()}           " hl group for file size
 se stl+=\ %#StatusLine#\ "   " back to normal hl group
-se stl+=\%{IsX(&paste,'P')} " are various things toggled?
-se stl+=\%{IsX(&hls,'H')}
-se stl+=\%{IsX(!&et,'T')}
+se stl+=\%{IsX(&paste,'📋')} " are various things toggled?
+se stl+=\%{IsX(&hls,'🔍')}
+se stl+=\%{IsX(!&et,'➡️')}
 se stl+=\%=
 se stl+=%#cinfo#\ \c%v\ "    " hl group char count
 se stl+=%#pinfo#\ \%p%%\ "   " hl group progress through file
-
