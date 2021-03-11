@@ -20,9 +20,11 @@ alias xclip="xclip -selection c"
 alias gbl='git branch --list'
 
 # Editing configs
+alias vim='nvim'
 alias vv='vim ~/.vimrc'
 alias vb='vim ~/.bashrc'
 alias vba='vim ~/.bin/.bash_aliases'
+alias vn='vim ~/.config/nvim/init.vim'
 alias vbf='vim ~/.bin/.bash_functions'
 
 alias config='/usr/bin/git --git-dir=$HOME/.rjh/ --work-tree=$HOME'

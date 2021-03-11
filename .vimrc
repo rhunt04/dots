@@ -75,6 +75,10 @@ let mapleader = ","
 nn : ;
 nn ; :
 nn vw viw
+ino () ()<Left>
+ino [] []<Left>
+ino {} {}<Left>
+ino <> <><Left>
 nn <leader>wp Vapgq
 nn <C-Left> :tabp<CR>
 nn <C-Right> :tabn<CR>
