@@ -68,6 +68,19 @@ cmkdir() {
   mkdir -p $1 && cd $1
 }
 
+trimtrail() {
+
+  # trim trailing space from a file.
+  [ $# -eq 0 ] && log "no arguments supplied." && return 1;
+
+  # remove trailing slash (possible if directory fed in)
+  for fdir in "${@%/}"; do
+    [[ ! -f "$fdir" ]] && log "\"$fdir\" not file." && continue;
+    sed -i 's/[ \t]*$//' $fdir
+  done
+
+}
+
 mkmv() {
   # Make a directory, and move * into it.
   mkdir -p $1
@@ -93,12 +106,4 @@ function boomerise {
   else
     sed -E 's/(.)(.)?/\U\1\L\2/g' <<< $@
   fi
-}
-
-function light {
-  cat ~/.bin/sequences_solarized_light
-}
-
-function dark {
-  cat ~/.cache/wal/sequences
 }

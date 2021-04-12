@@ -1,5 +1,7 @@
 " rjh init.vim
 
+let mapleader = ","
+
 " auto-install vim-plug
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   sil !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -11,6 +13,34 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'dracula/vim', { 'as': 'dracula' }
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
+
+" termguicolors + dracula.
+"se tgc
+let g:dracula_colorterm=0
+colo dracula
+
+" Use K to show documentation in preview window.
+nn <silent> K :cal <SID>show_doc()<CR>
+ino <silent><expr> <c-space> coc#refresh()
+
+se ut=300
+nmap <leader>d <Plug>(coc-definition)
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+fu! s:show_doc()
+  if ( index(['vim', 'help'], &filetype) >= 0 )
+    exe 'h '.expand('<cword>')
+  elsei ( coc#rpc#ready() )
+    cal CocActionAsync('doHover')
+  el
+    exe '!' . &keywordprg . " " . expand('<cword>')
+  en
+endf
 
 se guicursor=
 
@@ -28,12 +58,14 @@ se smc=90
 se shm+=I
 se sb spr
 se nu rnu
+se mouse=a
+se scl=number
 se fdm=marker
 se fmr=*{{,}}*
 nn <space> za
 se lbr nowrap
 se nocp t_RV=
-se fcs+=vert:│
+se fcs+=vert:\ "┆
 "se vi=                      " dont write viminfo file
 se vi+=n~/.config/nvim/nvi   " write inside ~/.config/nvim/vi
 se cb=unnamedplus
@@ -43,10 +75,11 @@ se ww+=<,>,[,]
 se list lcs=tab:\│\ "
 "se sbr=~              " not showing wraps...
 
-hi CursorLine cterm=NONE
-hi CursorLineNr ctermfg=5 cterm=BOLD
-" TODO style the vertical split line...
-"au ColorScheme * hi VertSplit ctermbg=2 ctermfg=white
+hi CursorLine ctermbg=NONE
+hi VertSplit cterm=NONE ctermbg=0
+
+hi TabLine cterm=NONE
+hi TabLineFill cterm=NONE
 
 hi! link Folded Normal
 " Highlight only last space. Saves lcs 'trail' chars looking ugly.
@@ -59,11 +92,9 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") |
 
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
-let g:netrw_liststyle = 3
+let g:netrw_liststyle = 0
 au BufNewFile * :Lexplore
 let g:netrw_browse_split = 3
-
-let mapleader = ","
 
 nn : ;
 nn ; :
@@ -96,10 +127,10 @@ fu! IsX(c,k)
 endf
 
 fu! Fsz()
-  retu printf('%.2gkB',abs(0.001*getfsize(expand(@%))))
+  retu printf('%.2gk',abs(0.001*getfsize(expand(@%))))
 endf
 
-hi StatusLine cterm=BOLD ctermfg=8
+hi StatusLine ctermbg=NONE ctermbg=0
 hi finfo cterm=BOLD ctermbg=5 ctermfg=0
 hi sinfo cterm=BOLD ctermbg=6 ctermfg=0
 hi cinfo cterm=BOLD ctermbg=3 ctermfg=0
@@ -112,5 +143,5 @@ se stl+=\%{IsX(&paste,'📋')} " are various things toggled?
 se stl+=\%{IsX(&hls,'🔍')}
 se stl+=\%{IsX(!&et,'➡️')}
 se stl+=\%=
-se stl+=%#cinfo#\ \c%v\ "    " hl group char count
-se stl+=%#pinfo#\ \%p%%\ "   " hl group progress through file
+se stl+=%#cinfo#\ ᶜ%v\ "    " hl group char count
+se stl+=%#pinfo#\ \%p﹪      " hl group progress through file

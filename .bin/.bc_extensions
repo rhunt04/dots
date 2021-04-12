@@ -309,6 +309,16 @@ define ceil(x) {
   return floor(x + 1)
 }
 
+define ctok(x) {
+  /* convert Celsius to Kelvin */
+  return (x + 273.15)
+}
+
+define clear() {
+  /* Another inelegant hack. */
+  print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+}
+
 /* }}* */
 
 /* Make user aware...*/
