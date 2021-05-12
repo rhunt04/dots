@@ -92,7 +92,7 @@ cal matchadd('ColorColumn','\%81v.',100)
 
 " }}*
 
-" *{{ au commands
+" *{{ Auto commands
 " Return to cursor location
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") |
   \ exe "norm! g`\"" | en
@@ -103,6 +103,9 @@ let g:netrw_banner = 0
 let g:netrw_winsize = 25
 let g:netrw_liststyle = 0
 let g:netrw_browse_split = 3
+
+" Remove line numbers for terminals
+au TermOpen * setl nonu nornu
 " }}*
 
 " *{{ Keymaps
@@ -129,7 +132,7 @@ no <silent><C-S> :update<CR>:ec " Saved '".expand('%:t')."'."<CR>
 nn <leader>t :%s/\s\+$//e<CR>:ec " Trimmed '".expand('%:t')."'."<CR>
 " }}*
 
-" *{{ My statusline
+" *{{ Statusline
 " If config item c present, return key k. Else, return empty string.
 fu! IsX(c,k)
   if a:c|retu a:k|el|retu ''|en
@@ -144,7 +147,7 @@ fu! Fsz()
   elsei  fs<1.0e6
     retu printf('%.1gk',1.0e-3*fs)
   el
-    retu printf('%.1gm',abs(1.0e-6*fs)
+    retu printf('%.1gm',1.0e-6*fs)
   en
 endf
 
