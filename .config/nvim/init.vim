@@ -130,6 +130,19 @@ nn <leader>h :se hls! hls?<CR>:ec " Toggled hls."<CR>
 nn <leader>p :se paste! paste?<CR>:ec " Toggled paste."<CR>
 no <silent><C-S> :update<CR>:ec " Saved '".expand('%:t')."'."<CR>
 nn <leader>t :%s/\s\+$//e<CR>:ec " Trimmed '".expand('%:t')."'."<CR>
+
+fu! Float(key)
+  " Run a key once, but if you find the cursor under whitespace, run it again
+  " - repeat.
+  " WARNING: only use this on actions which can terminate... no maxiter or
+  " check or anything.
+  exe 'norm!' a:key
+  wh line(".") > 1 && (strlen(getline(".")) < col(".") || getline(".")[col(".") - 1] =~ '\s')
+    exe 'norm!' a:key
+  endw
+endf
+nn <silent> <C-Up> :call Float('k')<CR>
+nn <silent> <C-Down> :call Float('j')<CR>
 " }}*
 
 " *{{ Statusline

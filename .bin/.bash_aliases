@@ -8,10 +8,10 @@ alias diff='diff -y --suppress-common-lines --color=always'
 alias ll='ls -l'
 alias lla='ll -a'
 alias grep='grep --color=auto'
+alias icat="kitty +kitten icat"
 alias sizes='du -sh * | sort -rh'
 alias update='sudo apt-fast update && sudo apt-fast upgrade'
 alias sudo='sudo -p "$(tput setaf 3)[sudo] pwd → $(tput sgr0)"'
-
 alias getpass='keepassxc-cli clip ~/Documents/Dropbox/misc/ryan_dbase.kdbx'
 
 # stupid tmux...
