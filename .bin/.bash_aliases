@@ -29,7 +29,7 @@ alias vb='vim ~/.bashrc'
 alias vba='vim ~/.bin/.bash_aliases'
 alias vn='vim ~/.config/nvim/init.vim'
 alias vbf='vim ~/.bin/.bash_functions'
-alias ius='ssh -i ~/.ssh/id_ecdsa -4 huntr3@ius.lancs.ac.uk'
+alias ius='ssh -X -i ~/.ssh/id_ecdsa -4 huntr3@ius.lancs.ac.uk'
 alias hec='ssh -X -i ~/.ssh/id_ecdsa -4 huntr3@wayland.hec.lancs.ac.uk'
 alias bc='bc -q -l ~/.bin/.bc_extensions'
 

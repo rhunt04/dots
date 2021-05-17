@@ -1,22 +1,16 @@
 #!/bin/bash
 # Ryan's bash functions file
 
-function log() {
+log() {
   # Print messages neatly when called from within a bash function.
 
   # FUNCNAME[0] would be "log", so go for the caller function, one-level up.
   echo "[${FUNCNAME[1]}] $1"
 }
 
-function backupImage() {
+backupImage() {
   # Check disk exists, check not mounted, check have space ...
   sudo dd bs=4M if=/dev/mmcblk0 | gzip > /home/ryan/BackupImage`date +%d%m%y`.gz
-}
-
-function writeImage() {
-  # Check disk exists, check not mounted, ...
-  #unzip -p <imageFile>.zip | sudo dd of=/dev/mmcblk0 bs=4M conv=fsync status=progress
-  echo "Finish me."
 }
 
 function tarball() {
@@ -87,7 +81,7 @@ mkmv() {
   find . -maxdepth 1 -not -path . -not -name $1 -exec mv {} $1 \;
 }
 
-function myip {
+myip() {
   # Get my IP address from various internet sources.
   ican_ip=$(curl -s -f icanhazip.com)
   ipch_ip=$(curl -s -f ipecho.net/plain)
@@ -98,7 +92,7 @@ function myip {
   echo -e "[ident.me]  \u2192 $idnt_ip"
 }
 
-function boomerise {
+boomerise() {
   #sed -E 's/(.)(.)?/\U\1\L\2/g' <<< $@
 
   if (( $# == 0 )) ; then

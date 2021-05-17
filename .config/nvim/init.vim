@@ -76,7 +76,6 @@ se shada+=n~/.config/nvim/nvi   " write inside ~/.config/nvim/nvi
 " }}*
 
 " *{{ Highlights
-"hi link Folded Normal
 hi CursorLine ctermbg=NONE
 hi VertSplit cterm=NONE ctermbg=0
 hi TabLine cterm=BOLD ctermbg=0 ctermfg=2
@@ -156,7 +155,7 @@ fu! Fsz()
   if fs<0
     retu printf('-')
   elsei fs<1.0e3
-    retu printf('%i',fs)
+    retu printf('%ib',fs)
   elsei  fs<1.0e6
     retu printf('%.1gk',1.0e-3*fs)
   el

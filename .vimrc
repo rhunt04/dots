@@ -50,11 +50,6 @@ se ww+=<,>,[,]
 se list lcs=tab:\│\ "
 "se sbr=~              " not showing wraps...
 
-hi CursorLine cterm=NONE
-hi CursorLineNr ctermfg=5 cterm=BOLD
-" TODO style the vertical split line...
-"au ColorScheme * hi VertSplit ctermbg=2 ctermfg=white
-
 hi! link Folded Normal
 " Highlight only last space. Saves lcs 'trail' chars looking ugly.
 hi ExtraWhitespace ctermbg=2
@@ -91,6 +86,19 @@ nn <leader>h :se hls! hls?<CR>:ec " Toggled hls."<CR>
 nn <leader>p :se paste! paste?<CR>:ec " Toggled paste."<CR>
 no <silent><C-S> :update<CR>:ec " Saved '".expand('%:t')."'."<CR>
 nn <leader>t :%s/\s\+$//e<CR>:ec " Trimmed '".expand('%:t')."'."<CR>
+
+fu! Float(key)
+  " Run a key once, but if you find the cursor under whitespace, run it again
+  " - repeat.
+  " WARNING: only use this on actions which can terminate... no maxiter or
+  " check or anything.
+  exe 'norm!' a:key
+  wh line(".") > 1 && (strlen(getline(".")) < col(".") || getline(".")[col(".") - 1] =~ '\s')
+    exe 'norm!' a:key
+  endw
+endf
+nn <silent> <C-Up> :call Float('k')<CR>
+nn <silent> <C-Down> :call Float('j')<CR>
 
 " Highlight any actual char beyond 80. Don't highlight when a char is next to
 " line 81, but still on line 80.
