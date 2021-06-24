@@ -14,7 +14,12 @@ endif
 call plug#begin('~/.config/nvim/plugged')
   Plug 'dracula/vim', { 'as': 'dracula' }
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'sirver/ultisnips'
 call plug#end()
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " termguicolors + dracula.
 "se tgc
@@ -105,6 +110,9 @@ let g:netrw_browse_split = 3
 
 " Remove line numbers for terminals
 au TermOpen * setl nonu nornu
+
+let g:tex_flavor = "latex"
+autocmd FileType latex,tex,md,markdown setl spell
 " }}*
 
 " *{{ Keymaps
@@ -135,8 +143,13 @@ fu! Float(key)
   " - repeat.
   " WARNING: only use this on actions which can terminate... no maxiter or
   " check or anything.
+  " WIP: variant which allows for detection of "change" under cursor: store
+  " initial cursor value, compare to this instead of looking for space. Bit
+  " odd at times, disabling for now.
+  " let l:myChar = strcharpart(getline('.')[col('.') - 1:], 0, 1)
   exe 'norm!' a:key
   wh line(".") > 1 && (strlen(getline(".")) < col(".") || getline(".")[col(".") - 1] =~ '\s')
+  "wh line(".") > 1 && (strlen(getline(".")) < col(".") || getline(".")[col(".") - 1] =~ l:myChar)
     exe 'norm!' a:key
   endw
 endf
@@ -172,10 +185,10 @@ se stl=%#finfo#
 se stl+=\ %f%M%R\ %#sinfo#   " hl group for file
 se stl+=\ %{Fsz()}           " hl group for file size
 se stl+=\ %#StatusLine#\ "   " back to normal hl group
-se stl+=\%{IsX(&paste,'📋')} " are various things toggled?
-se stl+=\%{IsX(&hls,'🔍')}
-se stl+=\%{IsX(!&et,'➡️')}
+se stl+=\%{IsX(&paste,'paste\ ')} " are various things toggled?
+se stl+=\%{IsX(&hls,'hls\ ')}
+se stl+=\%{IsX(!&et,'et\ ')}
 se stl+=\%=
-se stl+=%#cinfo#\ ᶜ%v\ "    " hl group char count
-se stl+=%#pinfo#\ \%p﹪      " hl group progress through file
+se stl+=%#cinfo#\ c%v\ "    " hl group char count
+se stl+=%#pinfo#\ \%p%%\ "  " hl group progress through file
 " }}*

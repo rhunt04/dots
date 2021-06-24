@@ -43,3 +43,5 @@ PROMPT_DIRTRIM=4
 export NVM_DIR="${HOME}/.nvm"
 ifThenSource "${NVM_DIR}"/nvm.sh
 ifThenSource "${NVM_DIR}"/bash_completion
+
+[ -e "/home/ryan/.bashrc.casino" ] && source "/home/ryan/.bashrc.casino"
