@@ -11,7 +11,7 @@ prepopulate-query-feeds yes
 display-article-progress yes
 feedhq-show-special-feeds no
 keep-articles-days 90
-browser "google-chrome --incognito %u"
+browser "xdg-open %u"
 
 # Article ignores (bit crude)
 ignore-article "*" "title =~ \"Sponsor\"
@@ -28,14 +28,15 @@ searchresult-title-format "Search Results"
 articlelist-format "%D%?T? > %-3T > ?%t"
 articlelist-title-format "%T - [%u/%t unread]"
 
-feedlist-format " %-20t %u\ "
-feedlist-title-format " Ryan's Feeds"
+feedlist-format " %-20t [%U]\ "
+feedlist-title-format "📡 Ryan's Feeds"
 # Colours
-color info               color3 default bold
+color info               color2 default bold
+color title              color2 default bold
 color article            color4 default
-color background         color9 default
-color listfocus          color0 color2
-color listfocus_unread   color0 color2  bold
+color background         default default
+color listfocus          color2 default bold
+color listfocus_unread   color2 default bold
 color listnormal         color5 default
 color listnormal_unread  color5 default bold
 # color end-of-text-marker color3 default dim
@@ -45,6 +46,8 @@ highlight article "http(s?)://[^ ]+" color3 default dim
 highlight article "^(Feed|Title|Link|Date|Author):.*$" color2 default dim
 
 # Hacky way to create "section"
-highlight feedlist "^.*(\\[.*\\]|[ ]{20})[ ]*" color2 default bold
-highlight feedlist "\\(0/0\\)[ ]*" color0 default
+# highlight feedlist "^.*(\\[.*\\]|[ ]{20})[ ]*" color2 default bold
+highlight feedlist "^\ -\ " color2 default bold
+highlight feedlist "\\[0\\][ ]*" color0 default dim
+highlight feedlist "\\[[A-Za-z ]+\\]" color2 default bold
 

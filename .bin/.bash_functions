@@ -101,3 +101,22 @@ boomerise() {
     sed -E 's/(.)(.)?/\U\1\L\2/g' <<< $@
   fi
 }
+
+get_key() {
+  # Try to match the first (space-separated) entry following $1 on a
+  # line which looks like: "^$1 <key> <key2> <key3> ...$", in file $2.
+  local _res
+  _res=$(grep -Po "^${1}\\s*\\K([^ ]*)" ${2})
+  echo "res: '${_res}'."
+}
+
+epstopng() {
+  # check if file etc...
+
+  epstopdf ${1}
+  base="${1%.*}"
+  pdftoppm ${base}.pdf -png > ${base}.png
+  mogrify -trim -rotate 90 ${base}.png
+  rm ${1} ${base}.pdf
+
+}

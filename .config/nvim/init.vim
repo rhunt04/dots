@@ -12,7 +12,7 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/plugged')
-  Plug 'dracula/vim', { 'as': 'dracula' }
+"  Plug 'dracula/vim', { 'as': 'dracula' }
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'sirver/ultisnips'
 call plug#end()
@@ -23,14 +23,16 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " termguicolors + dracula.
 "se tgc
-let g:dracula_colorterm=0
-colo dracula
+"let g:dracula_colorterm=0
+"colo dracula
+se bg=light
+colo solarized
 
 " Use K to show documentation in preview window.
 nn <silent> K :cal <SID>show_doc()<CR>
 ino <silent><expr> <c-space> coc#refresh()
 
-se ut=300
+"se ut=300
 nmap <leader>d <Plug>(coc-definition)
 
 " Symbol renaming.
@@ -81,18 +83,21 @@ se shada+=n~/.config/nvim/nvi   " write inside ~/.config/nvim/nvi
 " }}*
 
 " *{{ Highlights
-hi CursorLine ctermbg=NONE
+hi CursorLine ctermbg=7
+hi CursorLineNR ctermbg=7 cterm=BOLD
 hi VertSplit cterm=NONE ctermbg=0
+hi Folded cterm=NONE ctermbg=7 ctermfg=5
+hi TabLineFill cterm=NONE ctermbg=0
 hi TabLine cterm=BOLD ctermbg=0 ctermfg=2
 hi TabLineSel cterm=BOLD ctermbg=2 ctermfg=0
-hi TabLineFill cterm=NONE ctermbg=0
-hi TrailSpaces ctermbg=2
+
+hi TrailSpaces ctermbg=3
 mat TrailSpaces /\s\{1}$/ " highlight only last space.
 
 " Highlight any actual char beyond 80. Don't highlight when a char is next to
 " line 81, but still on line 80.
-hi ColorColumn ctermbg=1 ctermfg=0
-cal matchadd('ColorColumn','\%81v.',100)
+hi CColumn ctermbg=1 ctermfg=0
+cal matchadd('CColumn','\%81v.',100)
 
 " }}*
 
@@ -112,7 +117,7 @@ let g:netrw_browse_split = 3
 au TermOpen * setl nonu nornu
 
 let g:tex_flavor = "latex"
-autocmd FileType latex,tex,md,markdown setl spell
+autocmd FileType latex,tex,md,markdown setl spell spl=en_gb
 " }}*
 
 " *{{ Keymaps
@@ -148,7 +153,7 @@ fu! Float(key)
   " odd at times, disabling for now.
   " let l:myChar = strcharpart(getline('.')[col('.') - 1:], 0, 1)
   exe 'norm!' a:key
-  wh line(".") > 1 && (strlen(getline(".")) < col(".") || getline(".")[col(".") - 1] =~ '\s')
+  wh line(".")>1&&(strlen(getline("."))<col(".")||getline(".")[col(".")-1]=~'\s')
   "wh line(".") > 1 && (strlen(getline(".")) < col(".") || getline(".")[col(".") - 1] =~ l:myChar)
     exe 'norm!' a:key
   endw
@@ -176,7 +181,7 @@ fu! Fsz()
   en
 endf
 
-hi StatusLine ctermbg=0
+hi StatusLine ctermbg=0 ctermfg=15
 hi finfo cterm=BOLD ctermbg=5 ctermfg=0
 hi sinfo cterm=BOLD ctermbg=6 ctermfg=0
 hi cinfo cterm=BOLD ctermbg=3 ctermfg=0

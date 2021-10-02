@@ -93,7 +93,7 @@ fu! Float(key)
   " WARNING: only use this on actions which can terminate... no maxiter or
   " check or anything.
   exe 'norm!' a:key
-  wh line(".") > 1 && (strlen(getline(".")) < col(".") || getline(".")[col(".") - 1] =~ '\s')
+  wh line(".")>1&&(strlen(getline("."))<col(".")||getline(".")[col(".")-1]=~'\s')
     exe 'norm!' a:key
   endw
 endf
@@ -102,8 +102,8 @@ nn <silent> <C-Down> :call Float('j')<CR>
 
 " Highlight any actual char beyond 80. Don't highlight when a char is next to
 " line 81, but still on line 80.
-hi ColorColumn ctermbg=1 ctermfg=0
-cal matchadd('ColorColumn','\%81v.',100)
+hi CColumn ctermbg=1 ctermfg=0
+cal matchadd('CColumn','\%81v.',100)
 
 " If config item c present, return key k. Else, return empty string.
 fu! IsX(c,k)

@@ -35,46 +35,91 @@ unmap o
 map o zoom out
 # }}*
 
-# *{{ Dracula color theme - 1 mod
-# Modified default-bg to be slightly darker shade.
-# Want to see page breaks and edges...
-set notification-error-bg       "#ff5555" # Red
-set notification-error-fg       "#f8f8f2" # Foreground
-set notification-warning-bg     "#ffb86c" # Orange
-set notification-warning-fg     "#44475a" # Selection
-set notification-bg             "#282a36" # Background
-set notification-fg             "#f8f8f2" # Foreground
+# # *{{ Dracula color theme - 1 mod
+# # Modified default-bg to be slightly darker shade.
+# # Want to see page breaks and edges...
+# set notification-error-bg       "#ff5555" # Red
+# set notification-error-fg       "#f8f8f2" # Foreground
+# set notification-warning-bg     "#ffb86c" # Orange
+# set notification-warning-fg     "#44475a" # Selection
+# set notification-bg             "#282a36" # Background
+# set notification-fg             "#f8f8f2" # Foreground
+# 
+# set completion-bg               "#282a36" # Background
+# set completion-fg               "#6272a4" # Comment
+# set completion-group-bg         "#282a36" # Background
+# set completion-group-fg         "#6272a4" # Comment
+# set completion-highlight-bg     "#44475a" # Selection
+# set completion-highlight-fg     "#f8f8f2" # Foreground
+# 
+# set index-bg                    "#282a36" # Background
+# set index-fg                    "#f8f8f2" # Foreground
+# set index-active-bg             "#44475a" # Current Line
+# set index-active-fg             "#f8f8f2" # Foreground
+# 
+# set inputbar-bg                 "#282a36" # Background
+# set inputbar-fg                 "#f8f8f2" # Foreground
+# set statusbar-bg                "#282a36" # Background
+# set statusbar-fg                "#f8f8f2" # Foreground
+# 
+# set highlight-color             "#ffb86c" # Orange
+# set highlight-active-color      "#ff79c6" # Pink
+# 
+# set default-bg                  "#21222c" # DARKER Background
+# set default-fg                  "#f8f8f2" # Foreground
+# 
+# set render-loading              true
+# set render-loading-fg           "#282a36" # Background
+# set render-loading-bg           "#f8f8f2" # Foreground
+# 
+# # Recolor mode settings
+# set recolor-lightcolor          "#282a36" # Background
+# set recolor-darkcolor           "#f8f8f2" # Foreground
+# 
+# set recolor true
+# # }}*
 
-set completion-bg               "#282a36" # Background
-set completion-fg               "#6272a4" # Comment
-set completion-group-bg         "#282a36" # Background
-set completion-group-fg         "#6272a4" # Comment
-set completion-highlight-bg     "#44475a" # Selection
-set completion-highlight-fg     "#f8f8f2" # Foreground
+# *{{ zathurarc-light
+set notification-error-bg       "#eee8d5" # base2  # seem not work
+set notification-error-fg       "#dc322f" # red
+set notification-warning-bg     "#eee8d5" # base2
+set notification-warning-fg     "#dc322f" # red
+set notification-bg             "#eee8d5" # base2
+set notification-fg             "#268bd2" # blue
 
-set index-bg                    "#282a36" # Background
-set index-fg                    "#f8f8f2" # Foreground
-set index-active-bg             "#44475a" # Current Line
-set index-active-fg             "#f8f8f2" # Foreground
+set completion-bg               "#fdf6e3" # base3
+set completion-fg               "#657b83" # base00
+set completion-group-bg         "#eee8d5" # base2
+set completion-group-fg         "#586e75" # base01
+set completion-highlight-bg     "#93a1a1" # base1
+set completion-highlight-fg     "#073642" # base02
 
-set inputbar-bg                 "#282a36" # Background
-set inputbar-fg                 "#f8f8f2" # Foreground
-set statusbar-bg                "#282a36" # Background
-set statusbar-fg                "#f8f8f2" # Foreground
+# Define the color in index mode
+set index-bg                   "#fdf6e3" # base3
+set index-fg                   "#657b83" # base00
+set index-active-bg             "#eee8d5" # base2
+set index-active-fg             "#586e75" # base01
 
-set highlight-color             "#ffb86c" # Orange
-set highlight-active-color      "#ff79c6" # Pink
+set inputbar-bg                 "#93a1a1" # base1
+set inputbar-fg                 "#073642" # base02
 
-set default-bg                  "#21222c" # DARKER Background
-set default-fg                  "#f8f8f2" # Foreground
+set statusbar-bg                "#fdf6e3" # base3
+set statusbar-fg                "#657b83" # base00
 
+set highlight-color             "#839496" # base0  # hightlight match when search keyword(vim's /)
+set highlight-active-color      "#cb4616" # orange
+
+set default-bg                  "#fdf6e3" # base3
+set default-fg                  "#657b83" # base00
 set render-loading              true
-set render-loading-fg           "#282a36" # Background
-set render-loading-bg           "#f8f8f2" # Foreground
+# set render-loading-fg           "#fdf6e3" # base3
+# set render-loading-bg           "#fdf6e3" # base3
 
-# Recolor mode settings
-set recolor-lightcolor          "#282a36" # Background
-set recolor-darkcolor           "#f8f8f2" # Foreground
-
-set recolor true
+# Recolor book content's color
+# verbose
+# verbose
+set recolor-lightcolor          "#fdf6e3" # base3
+set recolor-darkcolor           "#657b83" # base00
+set recolor                     "true"
+# set recolor-keephue             true      # keep original color
 # }}*

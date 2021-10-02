@@ -2,8 +2,6 @@
 
 [[ $- != *i* ]] && return
 
-[ -e ~/.cache/wal/sequences ] && cat ~/.cache/wal/sequences
-
 # if a file exists, source it
 ifThenSource() { [ -s "$1" ] && . "$1" ;}
 ifThenSource ~/.bin/.bash_aliases

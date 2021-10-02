@@ -319,6 +319,17 @@ define clear() {
   print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
 }
 
+define sci(x) {
+  /* Rig scientific notation printing of a float... */
+  auto p, s
+  s = scale
+  scale = 6
+  p = 10 * x * pow(10, -floor(log(x)))
+  print p,"x10^(",floor(log(x))-1,")\n"
+  scale = s
+  return x
+}
+
 /* }}* */
 
 /* Make user aware...*/
