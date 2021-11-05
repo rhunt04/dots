@@ -14,12 +14,11 @@ fi
 
 # Touchpad ID (xinput) and status variables.
 # On different machines - these lines may need to be altered!
-id=$(xinput list | grep -oP "TouchPad\s*id=\K([0-9]+)")
+id=$(xinput list | grep -oP "tm2964-001\s*id=\K([0-9]+)")
 st=$(xinput list-props "${id}" | grep -oP "ce Enabled.*:\s*\K([0-9]+)")
 
 [ -z "${id}" ] && whinge;
 [ -z "${st}" ] && whinge;
-
 
 # 'echo' always has exit code 0.
 # -> Can use the <command> && echo || <command> one-liner safely here.

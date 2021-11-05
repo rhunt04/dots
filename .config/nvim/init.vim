@@ -13,8 +13,9 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 "  Plug 'dracula/vim', { 'as': 'dracula' }
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'sirver/ultisnips'
+  Plug 'ron89/thesaurus_query.vim'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -50,6 +51,26 @@ fu! s:show_doc()
     exe '!' . &keywordprg . " " . expand('<cword>')
   en
 endf
+
+" Thesaurus info:
+" Backend mthesaur:
+"   Download from:
+"   https://www.gutenberg.org/files/3202/files/mthesaur.txt
+"   then
+let g:tq_mthesaur_file="~/.config/nvim/thesaurus/mthesaur.txt"
+
+" Backend openoffice (if not locally available):
+" Download from:
+" https://www.openoffice.org/lingucomponent/MyThes-1.zip
+" (or get locally!)
+" then
+" let g:tq_openoffice_en_file="~/.config/nvim/thesaurus/MyThes-1.0/th_en_US_new"
+" The one on my machine (found by locate):
+let g:tq_openoffice_en_file="/usr/share/mythes/th_en_US_v2"
+let g:tq_enabled_backends=["datamuse_com","openoffice_en","mthesaur_txt"]
+
+let g:tq_language=['en']
+
 " }}*
 
 " *{{ Sets
@@ -117,7 +138,7 @@ let g:netrw_browse_split = 3
 au TermOpen * setl nonu nornu
 
 let g:tex_flavor = "latex"
-autocmd FileType latex,tex,md,markdown setl spell spl=en_gb
+autocmd FileType latex,tex,md,markdown setl spell spl=en_us tw=80
 " }}*
 
 " *{{ Keymaps
@@ -129,6 +150,7 @@ ino () ()<Left>
 ino [] []<Left>
 ino {} {}<Left>
 ino <> <><Left>
+ino "" ``''<Left><Left>
 nn <leader>wp Vapgq
 nn <C-w>n :tabnew<CR>
 nn <C-Left> :tabp<CR>
