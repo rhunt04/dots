@@ -137,8 +137,13 @@ let g:netrw_browse_split = 3
 " Remove line numbers for terminals
 au TermOpen * setl nonu nornu
 
+" LaTeX
 let g:tex_flavor = "latex"
-autocmd FileType latex,tex,md,markdown setl spell spl=en_us tw=80
+au FileType latex,tex,md,markdown setl spell spl=en_us tw=80
+au FileType latex,tex ino "" ``''<Left><Left>
+
+" git
+au FileType gitcommit setl spell spl=en_us tw=80
 " }}*
 
 " *{{ Keymaps
@@ -150,7 +155,6 @@ ino () ()<Left>
 ino [] []<Left>
 ino {} {}<Left>
 ino <> <><Left>
-ino "" ``''<Left><Left>
 nn <leader>wp Vapgq
 nn <C-w>n :tabnew<CR>
 nn <C-Left> :tabp<CR>

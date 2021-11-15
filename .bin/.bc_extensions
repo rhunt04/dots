@@ -85,6 +85,12 @@ ev_to_au     =   (1/au_to_ev)              /* <reciprocal measure> */
 au_to_mev    =   au_to_ev*1000             /* AU to meV conversion */
 mev_to_au    =   (1/au_to_mev)             /* <reciprocal measure> */
 
+/* Convert seconds (common timing criterion for cluster jobs) to real times. */
+s_to_min     =   (1/60)
+s_to_hour    =   (s_to_min/60)
+s_to_day     =   (s_to_hour/24)
+s_to_week    =   (s_to_day/7)
+
 /* }}* */
 
 /* *{{ Functions */
