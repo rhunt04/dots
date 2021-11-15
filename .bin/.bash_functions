@@ -120,3 +120,16 @@ epstopng() {
   rm ${1} ${base}.pdf
 
 }
+
+clear_clipboard () {
+  sleep ${1:-10}
+  xclip -sel clip < /dev/null
+}
+
+getpass() {
+  del=20
+  # Get password, timeout 1min.
+  keepassxc-cli clip ~/Documents/Dropbox/misc/ryan_dbase.kdbx ${1}
+  echo "Clearing in 10s."
+  clear_clipboard 10 &
+}
