@@ -24,12 +24,14 @@ bind -r '\C-s'
 # turn off xon/xoff toggle.
 stty -ixon
 
-# shopts
+# shopts (check activity swith `shopt -p`)
 shopt -s autocd
-shopt -s extglob
+shopt -s checkjobs
+shopt -s histappend
 
 # prevent search annoyance
 export HISTCONTROL=ignoreboth:erasedups
+export HISTIGNORE="getpass *"
 
 # PS1
 git_ps1() { bn=$(git symbolic-ref --short -q HEAD 2>/dev/null) &&

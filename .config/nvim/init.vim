@@ -9,7 +9,7 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
   sil !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
   \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   au VimEnter * PlugInstall
-endif
+en
 
 call plug#begin('~/.config/nvim/plugged')
 "  Plug 'dracula/vim', { 'as': 'dracula' }
@@ -68,8 +68,9 @@ let g:tq_mthesaur_file="~/.config/nvim/thesaurus/mthesaur.txt"
 " The one on my machine (found by locate):
 let g:tq_openoffice_en_file="/usr/share/mythes/th_en_US_v2"
 let g:tq_enabled_backends=["datamuse_com","openoffice_en","mthesaur_txt"]
-
 let g:tq_language=['en']
+
+nn <silent><leader>th :ThesaurusQueryReplaceCurrentWord<CR>
 
 " }}*
 
@@ -126,6 +127,8 @@ cal matchadd('CColumn','\%81v.',100)
 " Return to cursor location
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") |
   \ exe "norm! g`\"" | en
+" Open folds at cursor location (if folded)
+au BufReadPost * if (foldlevel('.') > 0) | exe "norm! za" | en
 
 " New file netrw
 au BufNewFile * :Lexplore
@@ -156,6 +159,7 @@ ino [] []<Left>
 ino {} {}<Left>
 ino <> <><Left>
 nn <leader>wp Vapgq
+nn <leader>wl gqq
 nn <C-w>n :tabnew<CR>
 nn <C-Left> :tabp<CR>
 nn <C-Right> :tabn<CR>
@@ -215,7 +219,7 @@ hi pinfo cterm=BOLD ctermbg=2 ctermfg=0
 se stl=%#finfo#
 se stl+=\ %f%M%R\ %#sinfo#   " hl group for file
 se stl+=\ %{Fsz()}           " hl group for file size
-se stl+=\ %#StatusLine#\ "   " back to normal hl group
+se stl+=\ %#StatusLine#\ "   " back to normal hl group this
 se stl+=\%{IsX(&paste,'paste\ ')} " are various things toggled?
 se stl+=\%{IsX(&hls,'hls\ ')}
 se stl+=\%{IsX(!&et,'et\ ')}
