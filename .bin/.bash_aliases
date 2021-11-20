@@ -22,7 +22,7 @@ alias xclip="xclip -selection c"
 alias gbl='git branch --list'
 
 # Editing configs
-alias vim='nvim'
+# alias vim='nvim'
 alias vv='vim ~/.vimrc'
 alias vb='vim ~/.bashrc'
 alias vba='vim ~/.bin/.bash_aliases'

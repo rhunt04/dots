@@ -27,6 +27,7 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 "let g:dracula_colorterm=0
 "colo dracula
 se bg=light
+
 colo solarized
 
 " Use K to show documentation in preview window.
@@ -41,6 +42,12 @@ nmap <leader>rn <Plug>(coc-rename)
 
 " Highlight the symbol and its references when holding the cursor.
 au CursorHold * silent call CocActionAsync('highlight')
+
+hi! CocInfoSign cterm=BOLD ctermbg=7
+hi! CocErrorSign cterm=BOLD ctermbg=7 ctermfg=0
+hi! CocWarningSign cterm=BOLD ctermbg=7 ctermfg=red
+hi! CocHighlightText cterm=BOLD
+hi! Pmenu cterm=NONE
 
 fu! s:show_doc()
   if ( index(['vim', 'help'], &filetype) >= 0 )
