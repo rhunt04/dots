@@ -14,9 +14,38 @@ endif
 
 call plug#begin('~/.vim/plugged')
   Plug 'sirver/ultisnips'
+  Plug 'dense-analysis/ale'
   Plug 'ron89/thesaurus_query.vim'
   Plug 'altercation/vim-colors-solarized'
 call plug#end()
+
+" *{{ ALE
+let g:ale_fixers = {
+\  '*': ['remove_trailing_lines', 'trim_whitespace'],
+\}
+
+" When should we lint? Save only.
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_text_changed = 'never'
+
+" Symbol definitions.
+let g:ale_sign_error = "⚠"
+let g:ale_sign_warning = "⚐"
+
+" Fixers.
+let g:ale_fix_on_save = 1
+let g:ale_floating_preview = 1
+let g:ale_completion_enabled = 1
+
+" Errors in tray.
+let g:ale_echo_msg_error_str = 'Error'
+let g:ale_echo_msg_warning_str = 'Warning'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+nn <silent> K :ALEDetail<CR>
+" }}*
 
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
@@ -119,7 +148,6 @@ let g:netrw_browse_split = 3
 " LaTeX
 let g:tex_flavor = "latex"
 au FileType latex,tex,md,markdown setl spell spl=en_us tw=80
-au FileType latex,tex ino "" ``''<Left><Left>
 
 " git
 au FileType gitcommit setl spell spl=en_us tw=80
@@ -187,10 +215,21 @@ fu! Fsz()
   en
 endf
 
+fu! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? '✓' :
+    \ printf('%d⚠ %d⚐', all_errors, all_non_errors)
+endfunction
+
 hi StatusLine ctermbg=0 ctermfg=15
 hi finfo cterm=BOLD ctermbg=5 ctermfg=0
 hi sinfo cterm=BOLD ctermbg=6 ctermfg=0
 hi cinfo cterm=BOLD ctermbg=3 ctermfg=0
+hi linfo cterm=BOLD ctermbg=4 ctermfg=0
 hi pinfo cterm=BOLD ctermbg=2 ctermfg=0
 se stl=%#finfo#
 se stl+=\ %f%M%R\ %#sinfo#   " hl group for file
@@ -200,6 +239,7 @@ se stl+=\%{IsX(&paste,'paste\ ')} " are various things toggled?
 se stl+=\%{IsX(&hls,'hls\ ')}
 se stl+=\%{IsX(!&et,'et\ ')}
 se stl+=\%=
-se stl+=%#cinfo#\ c%v\ "    " hl group char count
-se stl+=%#pinfo#\ \%p%%\ "  " hl group progress through file
+se stl+=%#linfo#\ %{LinterStatus()}\ "    " lint info
+se stl+=%#cinfo#\ c%v\ "                  " hl group char count
+se stl+=%#pinfo#\ \%p%%\ "                " hl group progress through file
 " }}*
