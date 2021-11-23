@@ -81,3 +81,26 @@ snippet sidefig
 }
 \end{figure}
 endsnippet
+
+snippet fig
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width=\linewidth]{$1}
+  \caption{$2}%
+\label{fig:$3}
+\end{figure}
+
+$0
+endsnippet
+
+snippet sec "Section"
+\section{$1\label{sec:$2}}
+endsnippet
+
+snippet sub "Subsection"
+\subsection{$1\label{sub:$2}}
+endsnippet
+
+snippet subsub "Subsubsection"
+\subsubsection{$1\label{$2}}
+endsnippet

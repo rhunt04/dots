@@ -164,6 +164,8 @@ ino {} {}<Left>
 ino <> <><Left>
 nn <leader>wp Vapgq
 nn <leader>wl gqq
+nn <leader>. dEi.<Esc>
+nn <leader>s i<space><Esc>
 nn <C-w>n :tabnew<CR>
 nn <C-Left> :tabp<CR>
 nn <C-Right> :tabn<CR>
