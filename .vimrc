@@ -55,7 +55,10 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 "se tgc
 "let g:dracula_colorterm=0
 "colo dracula
-se bg=light
+
+se bg=dark
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
 colo solarized
 
 hi! Pmenu cterm=NONE
@@ -113,13 +116,12 @@ se list lcs=tab:\│\ "
 " }}*
 
 " *{{ Highlights
-hi CursorLine ctermbg=7
-hi CursorLineNR ctermbg=7 cterm=BOLD
-hi VertSplit cterm=NONE ctermbg=0
-hi Folded cterm=NONE ctermbg=7 ctermfg=5
-hi TabLineFill cterm=NONE ctermbg=0
-hi TabLine cterm=BOLD ctermbg=0 ctermfg=2
-hi TabLineSel cterm=BOLD ctermbg=2 ctermfg=0
+hi LineNR ctermfg=240
+hi CursorLineNR cterm=BOLD ctermbg=235 ctermfg=240
+hi Folded cterm=NONE
+hi TabLine cterm=NONE
+hi TabLineFill cterm=NONE
+hi TabLineSel cterm=BOLD ctermfg=2 ctermbg=235
 
 hi TrailSpaces ctermbg=3
 mat TrailSpaces /\s\{1}$/ " highlight only last space.
@@ -227,7 +229,7 @@ fu! LinterStatus() abort
     \ printf('%d⚠ %d⚐', all_errors, all_non_errors)
 endfunction
 
-hi StatusLine ctermbg=0 ctermfg=15
+hi StatusLine ctermbg=3 ctermfg=235
 hi finfo cterm=BOLD ctermbg=5 ctermfg=0
 hi sinfo cterm=BOLD ctermbg=6 ctermfg=0
 hi cinfo cterm=BOLD ctermbg=3 ctermfg=0

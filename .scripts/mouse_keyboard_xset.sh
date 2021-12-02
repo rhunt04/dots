@@ -6,6 +6,7 @@
 xinput --set-prop 'TPPS/2 IBM TrackPoint' 'libinput Accel Speed' 1
 xinput --set-prop 'Logitech USB Trackball' 'libinput Accel Speed' 1
 xinput --set-prop 'Synaptics tm2964-001' 'libinput Accel Speed' 1
+xinput --set-prop 'PixArt HP USB Optical Mouse' 'libinput Accel Speed' 1
 
 # Tapping to click on touchpad.
 xinput --set-prop 'Synaptics tm2964-001' 'libinput Tapping Enabled' 1

@@ -3,7 +3,7 @@
 # *{{ general settings
 set page-padding 5
 set guioptions none
-set font Fira\ Code\ 10
+set font Fira\ Code\ 12
 set adjust-open best-fit
 set show-scrollbars false
 set statusbar-basename true
@@ -44,38 +44,38 @@ map o zoom out
 # set notification-warning-fg     "#44475a" # Selection
 # set notification-bg             "#282a36" # Background
 # set notification-fg             "#f8f8f2" # Foreground
-# 
+#
 # set completion-bg               "#282a36" # Background
 # set completion-fg               "#6272a4" # Comment
 # set completion-group-bg         "#282a36" # Background
 # set completion-group-fg         "#6272a4" # Comment
 # set completion-highlight-bg     "#44475a" # Selection
 # set completion-highlight-fg     "#f8f8f2" # Foreground
-# 
+#
 # set index-bg                    "#282a36" # Background
 # set index-fg                    "#f8f8f2" # Foreground
 # set index-active-bg             "#44475a" # Current Line
 # set index-active-fg             "#f8f8f2" # Foreground
-# 
+#
 # set inputbar-bg                 "#282a36" # Background
 # set inputbar-fg                 "#f8f8f2" # Foreground
 # set statusbar-bg                "#282a36" # Background
 # set statusbar-fg                "#f8f8f2" # Foreground
-# 
+#
 # set highlight-color             "#ffb86c" # Orange
 # set highlight-active-color      "#ff79c6" # Pink
-# 
+#
 # set default-bg                  "#21222c" # DARKER Background
 # set default-fg                  "#f8f8f2" # Foreground
-# 
+#
 # set render-loading              true
 # set render-loading-fg           "#282a36" # Background
 # set render-loading-bg           "#f8f8f2" # Foreground
-# 
+#
 # # Recolor mode settings
 # set recolor-lightcolor          "#282a36" # Background
 # set recolor-darkcolor           "#f8f8f2" # Foreground
-# 
+#
 # set recolor true
 # # }}*
 
@@ -109,7 +109,7 @@ set statusbar-fg                "#657b83" # base00
 set highlight-color             "#839496" # base0  # hightlight match when search keyword(vim's /)
 set highlight-active-color      "#cb4616" # orange
 
-set default-bg                  "#fdf6e3" # base3
+set default-bg                  "#d7d7af" # Altered, darker than base3
 set default-fg                  "#657b83" # base00
 set render-loading              true
 # set render-loading-fg           "#fdf6e3" # base3
