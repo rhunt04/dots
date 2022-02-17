@@ -166,6 +166,7 @@ ino {} {}<Left>
 ino <> <><Left>
 nn <leader>wp Vapgq
 nn <leader>wl gqq
+nn <leader>ct Vap : !column -te \| sed '/^\#/ s/ \{1,\}/ /g'<CR>
 nn <leader>. dEi.<Esc>
 nn <leader>s i<space><Esc>
 nn <C-w>n :tabnew<CR>

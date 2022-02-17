@@ -77,12 +77,12 @@ temppl       =   1.416808*10^(32)          /* Planck temp. [K] */
 
 /* Ryan's specialties: */
 
-au_to_ang    =   5.2917721067*10^(-1)      /* AU to ang conversion */
+au_to_ang    =   5.2917721067*10^(-1)      /* au to ang conversion */
 ang_to_au    =   (1/au_to_ang)             /* <reciprocal measure> */
-au_to_ev     =   27.21138602               /* AU to eV conversion */
+au_to_ev     =   27.21138602               /* au to eV conversion */
 pcm_to_ev    =   1.2398419739*10^(-4)      /* /cm to eV conversion */
 ev_to_au     =   (1/au_to_ev)              /* <reciprocal measure> */
-au_to_mev    =   au_to_ev*1000             /* AU to meV conversion */
+au_to_mev    =   au_to_ev*1000             /* au to meV conversion */
 mev_to_au    =   (1/au_to_mev)             /* <reciprocal measure> */
 
 /* Convert seconds (common timing criterion for cluster jobs) to real times. */
