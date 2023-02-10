@@ -4,14 +4,15 @@ auto-reload yes
 reload-time 120
 confirm-exit no
 reload-threads 100
+show-keymap-hint no
 cleanup-on-quit yes
+browser "xdg-open %u"
 ignore-mode "display"
+keep-articles-days 90
 refresh-on-startup yes
 prepopulate-query-feeds yes
 display-article-progress yes
 feedhq-show-special-feeds no
-keep-articles-days 90
-browser "xdg-open %u"
 
 # Article ignores (bit crude)
 ignore-article "*" "title =~ \"Sponsor\"
@@ -19,35 +20,33 @@ ignore-article "*" "title =~ \"Advertisement\"
 
 # Formats
 help-title-format "Help"
+datetime-format "%H:%M %e/%m "
 itemview-title-format "%T"
 dialogs-title-format "Dialogs"
 selecttag-title-format "Select Tag"
 selectfilter-title-format "Select Filter"
 searchresult-title-format "Search Results"
 
-articlelist-format "%D%?T? > %-3T > ?%t"
-articlelist-title-format "%T - [%u/%t unread]"
+articlelist-format " %-100t %> %T │ %D "
+articlelist-title-format " %T - [%u/%t unread]"
 
-feedlist-format " %-20t [%U]\ "
-feedlist-title-format "📡 Ryan's Feeds"
+feedlist-format " %-20t %> %4U"
+feedlist-title-format " Ryan's Feeds"
+
 # Colours
-color info               color2 default bold
-color title              color2 default bold
-color article            color4 default
-color background         default default
-color listfocus          color2 default bold
-color listfocus_unread   color2 default bold
-color listnormal         color5 default
-color listnormal_unread  color5 default bold
+color info               blue default
+color article            default default
+color listfocus          white magenta
+color listfocus_unread   white magenta bold
+color listnormal         default default
+color listnormal_unread  default default bold
 # color end-of-text-marker color3 default dim
 
 # Highlights
-highlight article "http(s?)://[^ ]+" color3 default dim
-highlight article "^(Feed|Title|Link|Date|Author):.*$" color2 default dim
+highlight article "http(s?)://[^ ]+" blue default bold
+highlight article "^(Feed|Title|Link|Date|Author):.*$" default default
 
 # Hacky way to create "section"
-# highlight feedlist "^.*(\\[.*\\]|[ ]{20})[ ]*" color2 default bold
-highlight feedlist "^\ -\ " color2 default bold
-highlight feedlist "\\[0\\][ ]*" color0 default dim
-highlight feedlist "\\[[A-Za-z ]+\\]" color2 default bold
-
+highlight feedlist "^\ ┌" blue default
+highlight feedlist "^\ ├►" blue default
+highlight feedlist "^\ └►" blue default

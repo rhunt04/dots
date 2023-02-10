@@ -59,7 +59,7 @@ extract() {
 
 cmkdir() {
   # Make a directory, and cd into it.
-  mkdir -p $1 && cd $1
+  mkdir -p "${1}" && cd "${1}" || return
 }
 
 trimtrail() {
@@ -70,15 +70,15 @@ trimtrail() {
   # remove trailing slash (possible if directory fed in)
   for fdir in "${@%/}"; do
     [[ ! -f "$fdir" ]] && log "\"$fdir\" not file." && continue;
-    sed -i 's/[ \t]*$//' $fdir
+    sed -i 's/[ \t]*$//' "${fdir}"
   done
 
 }
 
 mkmv() {
   # Make a directory, and move * into it.
-  mkdir -p $1
-  find . -maxdepth 1 -not -path . -not -name $1 -exec mv {} $1 \;
+  mkdir -p "${1}"
+  find . -maxdepth 1 -not -path . -not -name "${1}" -exec mv {} "${1}" \;
 }
 
 myip() {
@@ -98,7 +98,7 @@ boomerise() {
   if (( $# == 0 )) ; then
     sed -E 's/(.)(.)?/\U\1\L\2/g' < /dev/stdin
   else
-    sed -E 's/(.)(.)?/\U\1\L\2/g' <<< $@
+    sed -E 's/(.)(.)?/\U\1\L\2/g' <<< "${@}"
   fi
 }
 
@@ -106,30 +106,37 @@ get_key() {
   # Try to match the first (space-separated) entry following $1 on a
   # line which looks like: "^$1 <key> <key2> <key3> ...$", in file $2.
   local _res
-  _res=$(grep -Po "^${1}\\s*\\K([^ ]*)" ${2})
+  _res=$(grep -Po "^${1}\\s*\\K([^ ]*)" "${2}")
   echo "res: '${_res}'."
 }
 
 epstopng() {
   # check if file etc...
 
-  epstopdf ${1}
+  epstopdf "${1}"
   base="${1%.*}"
-  pdftoppm ${base}.pdf -png > ${base}.png
-  mogrify -trim -rotate 90 ${base}.png
-  rm ${1} ${base}.pdf
+  pdftoppm "${base}.pdf" -png > "${base}.png"
+  mogrify -trim -rotate 90 "${base}.png"
+  rm "${1}" "${base}.pdf"
 
 }
 
 clear_clipboard () {
-  sleep ${1:-10}
+  sleep "${1:-10}"
   xclip -sel clip < /dev/null
 }
 
 getpass() {
-  del=20
   # Get password, timeout 1min.
-  keepassxc-cli clip ~/Documents/Dropbox/misc/ryan_dbase.kdbx ${1}
+  keepassxc-cli clip ~/Documents/ryan_dbase.kdbx "${1}"
   echo "Clearing in 10s."
   clear_clipboard 10 &
+}
+
+send_to_phone() {
+  bt-obex -p EC:AA:25:5C:BF:7D "${1}"
+}
+
+send_to_tablet() {
+  bt-obex -p 00:BB:1C:1A:7F:79 "${1}"
 }

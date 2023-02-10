@@ -53,11 +53,6 @@ fi
 # Colours, and misc identical conf.
 conf=" -padding 10 -font \"Fira Code 12\" -separator-style none -line-margin 0"
 conf+=" -hide-scrollbar -disable-history -sort -levenshtein-sort -bw 2"
-conf+=" -color-window \"$background, $foreground, $color0\""
-conf+=" -color-normal"
-conf+=" \"$background, $foreground, $background, $background, $color4\""
-conf+=" -color-active"
-conf+=" \"$background, $color3, $background, $background, $color4\""
 
 cmd+=$conf
 eval "$cmd"

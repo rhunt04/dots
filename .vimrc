@@ -44,6 +44,14 @@ let g:ale_echo_msg_error_str = 'Error'
 let g:ale_echo_msg_warning_str = 'Warning'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
+let g:ale_linters = {
+  \ 'python': ['pylsp', 'flake8', 'pyflakes'],
+  \ 'markdown': ['markdownlint', 'writegood', 'alex', 'proselint']
+\}
+let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰']
+let g:ale_floating_window_border = repeat([''], 6)
+
+nn <silent> H :ALEHover<CR>
 nn <silent> K :ALEDetail<CR>
 " }}*
 
@@ -116,12 +124,15 @@ se list lcs=tab:\│\ "
 " }}*
 
 " *{{ Highlights
+hi BoldHL gui=BOLD cterm=BOLD
 hi LineNR ctermfg=240
-hi CursorLineNR cterm=BOLD ctermbg=235 ctermfg=240
 hi Folded cterm=NONE
 hi TabLine cterm=NONE
 hi TabLineFill cterm=NONE
-hi TabLineSel cterm=BOLD ctermfg=2 ctermbg=235
+" hi CursorLineNR cterm=BOLD ctermbg=187 ctermfg=240 " light
+hi CursorLineNR cterm=BOLD ctermbg=235 ctermfg=240 " dark
+" hi TabLineSel cterm=BOLD ctermfg=2 ctermbg=187 " light
+hi TabLineSel cterm=BOLD ctermfg=2 ctermbg=235 " dark
 
 hi TrailSpaces ctermbg=3
 mat TrailSpaces /\s\{1}$/ " highlight only last space.
@@ -166,7 +177,6 @@ ino {} {}<Left>
 ino <> <><Left>
 nn <leader>wp Vapgq
 nn <leader>wl gqq
-nn <leader>ct Vap : !column -te \| sed '/^\#/ s/ \{1,\}/ /g'<CR>
 nn <leader>. dEi.<Esc>
 nn <leader>s i<space><Esc>
 nn <C-w>n :tabnew<CR>
@@ -179,24 +189,56 @@ ino [<CR> [<CR>]<Esc>ko<Tab>
 vn <C-r> "ry:%s/<C-r>r//gc<C-f>3h<C-c>
 nn <leader>h :se hls! hls?<CR>:ec " Toggled hls."<CR>
 nn <leader>p :se paste! paste?<CR>:ec " Toggled paste."<CR>
+" Handy for re-formatting current paragraph with `column`.
+nn <leader>ct Vap : !column -te \| sed '/^\#/ s/ \{1,\}/ /g'<CR>
 no <silent><C-S> :update<CR>:ec " Saved '".expand('%:t')."'."<CR>
 nn <leader>t :%s/\s\+$//e<CR>:ec " Trimmed '".expand('%:t')."'."<CR>
 
-fu! Float(key)
-  " Run a key once, but if you find the cursor under whitespace, run it again
-  " - repeat.
+fu! Float(key) abort
+  " Whilst the cursor is on a character which matches the character the
+  " function was initiated on, keep running an action. If land on a space,
+  " keep running. Helpful for moving up/down indented regions.
   " WARNING: only use this on actions which can terminate... no maxiter or
-  " check or anything.
-  " WIP: variant which allows for detection of "change" under cursor: store
-  " initial cursor value, compare to this instead of looking for space. Bit
-  " odd at times, disabling for now.
-  " let l:myChar = strcharpart(getline('.')[col('.') - 1:], 0, 1)
-  exe 'norm!' a:key
-  wh line(".")>1&&(strlen(getline("."))<col(".")||getline(".")[col(".")-1]=~'\s')
-  "wh line(".") > 1 && (strlen(getline(".")) < col(".") || getline(".")[col(".") - 1] =~ l:myChar)
+  " check or anything. We currently only use it to float up/down a file.
+  " let l:FC = 0
+  let l:myChar = strcharpart(getline('.')[col('.') - 1:], 0, 1)
+  wh strlen(getline(".")) < col(".") ||
+    \ getline(".")[col(".") - 1] =~ l:myChar ||
+    \ getline(".")[col(".") - 1] =~ " "
+
+    " Execute the key in normal mode.
     exe 'norm!' a:key
+    " let FC = FC + 1
+
+    " If at start/end of file, stop floating.
+    if line(".") == 1
+      echoh BoldHL | ec " ⚠ Top of file: can't float higher!" | echoh None
+      brea
+    elsei line(".") == line("$")
+      echoh BoldHL | ec " ⚠ End of file: can't float lower!" | echoh None
+      brea
+    en
+
+    " Don't enter a loop on closed folds...
+    if foldclosed(".") > -1
+      echoh BoldHL | ec " ⚐ Not going into a fold." | echoh None
+      brea
+    en
+
   endw
+
+  " In principle, could echo the number of lines floated here.
+  " Seems a little buggy - when screen redraws we can lose what is
+  " printed in the info bar.
+
 endf
+
+" Map arrow keys explicitly: sometimes these sequences are missed.
+map <Esc>[1;5D <C-Left>
+map <Esc>[1;5C <C-Right>
+map <Esc>[1;5A <C-Up>
+map <Esc>[1;5B <C-Down>
+
 nn <silent> <C-Up> :call Float('k')<CR>
 nn <silent> <C-Down> :call Float('j')<CR>
 " }}*
@@ -221,16 +263,17 @@ fu! Fsz()
 endf
 
 fu! LinterStatus() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
+  let l:counts = ale#statusline#Count(bufnr(''))
 
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
 
-    return l:counts.total == 0 ? '✓' :
-    \ printf('%d⚠ %d⚐', all_errors, all_non_errors)
-endfunction
+  retu l:counts.total == 0 ? '✓' :
+  \ printf('%d⚠ %d⚐', all_errors, all_non_errors)
+endf
 
-hi StatusLine ctermbg=3 ctermfg=235
+" hi StatusLine ctermbg=3 ctermfg=187 " light
+hi StatusLine ctermbg=3 ctermfg=235 " dark
 hi finfo cterm=BOLD ctermbg=5 ctermfg=0
 hi sinfo cterm=BOLD ctermbg=6 ctermfg=0
 hi cinfo cterm=BOLD ctermbg=3 ctermfg=0

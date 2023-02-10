@@ -10,6 +10,7 @@ ifThenSource ~/.bin/.machine_specifics
 
 ifThenPath() { [ -d "$1" ] && export PATH="$1:$PATH" ;}
 ifThenPath ~/.bin
+ifThenPath ~/.joplin
 ifThenPath ~/.scripts
 ifThenPath ~/.local/bin
 
@@ -43,5 +44,3 @@ PROMPT_DIRTRIM=4
 export NVM_DIR="${HOME}/.nvm"
 ifThenSource "${NVM_DIR}"/nvm.sh
 ifThenSource "${NVM_DIR}"/bash_completion
-
-[ -e "/home/ryan/.bashrc.casino" ] && source "/home/ryan/.bashrc.casino"
