@@ -1,32 +1,33 @@
 " rjh .vimrc
 
-let mapleader = ","
+let mapleader = ','
 se nocp
 filet plugin indent off
 
 " *{{ Plugins
 " auto-install vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
-  sil !curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  sil !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   au VimEnter * PlugInstall
 endif
 
 call plug#begin('~/.vim/plugged')
-  Plug 'sirver/ultisnips'
+  "Plug 'sirver/ultisnips'
+  Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
   Plug 'dense-analysis/ale'
-  Plug 'ron89/thesaurus_query.vim'
-  Plug 'altercation/vim-colors-solarized'
+  Plug 'voldikss/vim-floaterm'
+  "Plug 'ron89/thesaurus_query.vim'
+  "Plug 'altercation/vim-colors-solarized'
 call plug#end()
 
 " *{{ ALE
-let g:ale_fixers = {
-\  '*': ['remove_trailing_lines', 'trim_whitespace'],
-\}
+let g:ale_completion_enabled = 1
 
 " When should we lint? Save only.
+let g:ale_fix_on_save = 1
 let g:ale_lint_on_save = 1
-let g:ale_lint_on_enter = 0
+let g:ale_lint_on_enter = 1
 let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_text_changed = 'never'
 
@@ -36,8 +37,10 @@ let g:ale_sign_warning = "⚐"
 
 " Fixers.
 let g:ale_fix_on_save = 1
+let g:ale_set_balloons = 1
+let g:ale_cursor_detail = 1
 let g:ale_floating_preview = 1
-let g:ale_completion_enabled = 1
+let g:ale_detail_to_floating_preview = 1
 
 " Errors in tray.
 let g:ale_echo_msg_error_str = 'Error'
@@ -45,19 +48,37 @@ let g:ale_echo_msg_warning_str = 'Warning'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 let g:ale_linters = {
-  \ 'python': ['pylsp', 'flake8', 'pyflakes'],
-  \ 'markdown': ['markdownlint', 'writegood', 'alex', 'proselint']
+  \ 'python': ['pylsp', 'flake8', 'bandit', 'pydocstyle'],
+  \ 'yaml': ['yamllint'],
+  \ 'markdown': ['markdownlint', 'writegood', 'alex', 'proselint', 'cspell'],
+  \ 'vim': ['vint', 'vimls', 'cspell'],
+  \ 'bash': ['bash-language-server', 'shellcheck'],
+  \ 'latex': ['lacheck'],
+  \ 'docker': ['hadolint']
 \}
+
+let g:ale_fixers = {
+\  '*': ['remove_trailing_lines', 'trim_whitespace'],
+\  'python': ['isort']
+\}
+
 let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰']
-let g:ale_floating_window_border = repeat([''], 6)
 
 nn <silent> H :ALEHover<CR>
 nn <silent> K :ALEDetail<CR>
 " }}*
 
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+" *{{ Floaterm
+let g:floaterm_title=''
+let g:floaterm_borderchars='═║═║╔╗╝╚'
+nn <silent><C-h> :FloatermToggle<CR>
+tno <silent><C-h> <C-\><C-n>:FloatermToggle<CR>
+hi FloatermBorder ctermbg=0 ctermfg=2
+" }}*
+
+"let g:UltiSnipsExpandTrigger='<tab>'
+"let g:UltiSnipsJumpForwardTrigger='<tab>'
+"let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 
 " termguicolors + dracula.
 "se tgc
@@ -65,9 +86,9 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 "colo dracula
 
 se bg=dark
-let g:solarized_termcolors=256
-let g:solarized_termtrans=1
-colo solarized
+"let g:solarized_termcolors=256
+"let g:solarized_termtrans=1
+"colo solarized
 
 hi! Pmenu cterm=NONE
 
@@ -76,7 +97,7 @@ hi! Pmenu cterm=NONE
 "   Download from:
 "   https://www.gutenberg.org/files/3202/files/mthesaur.txt
 "   then
-let g:tq_mthesaur_file="~/.config/nvim/thesaurus/mthesaur.txt"
+"let g:tq_mthesaur_file='~/.config/nvim/thesaurus/mthesaur.txt'
 
 " Backend openoffice (if not locally available):
 " Download from:
@@ -85,18 +106,19 @@ let g:tq_mthesaur_file="~/.config/nvim/thesaurus/mthesaur.txt"
 " then
 " let g:tq_openoffice_en_file="~/.config/nvim/thesaurus/MyThes-1.0/th_en_US_new"
 " The one on my machine (found by locate):
-let g:tq_openoffice_en_file="/usr/share/mythes/th_en_US_v2"
-let g:tq_enabled_backends=["datamuse_com","openoffice_en","mthesaur_txt"]
-let g:tq_language=['en']
+"let g:tq_openoffice_en_file="/usr/share/mythes/th_en_US_v2"
+"let g:tq_enabled_backends=['datamuse_com','openoffice_en','mthesaur_txt']
+"let g:tq_language=['en']
 
-nn <silent><leader>th :ThesaurusQueryReplaceCurrentWord<CR>
+"nn <silent><leader>th :ThesaurusQueryReplaceCurrentWord<CR>
 
 " }}*
 
 " *{{ Sets
 se ml
-syn on
+se sms
 se cul
+syn on
 se acd
 se bs=2
 se gcr=
@@ -126,11 +148,12 @@ se list lcs=tab:\│\ "
 " *{{ Highlights
 hi BoldHL gui=BOLD cterm=BOLD
 hi LineNR ctermfg=240
-hi Folded cterm=NONE
+hi Folded cterm=NONE ctermbg=235 ctermfg=3
 hi TabLine cterm=NONE
 hi TabLineFill cterm=NONE
 " hi CursorLineNR cterm=BOLD ctermbg=187 ctermfg=240 " light
 hi CursorLineNR cterm=BOLD ctermbg=235 ctermfg=240 " dark
+hi CursorLine cterm=NONE ctermbg=235 " dark
 " hi TabLineSel cterm=BOLD ctermfg=2 ctermbg=187 " light
 hi TabLineSel cterm=BOLD ctermfg=2 ctermbg=235 " dark
 
@@ -144,12 +167,12 @@ cal matchadd('CColumn','\%81v.',100)
 
 " }}*
 
-" *{{ Auto commands
+" *{{ Auto Commands
 " Return to cursor location
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") |
-  \ exe "norm! g`\"" | en
+au BufReadPost * if line('''"') > 1 && line('''"') <= line("$") |
+  \ exe 'norm! g`"' | en
 " Open folds at cursor location (if folded)
-au BufReadPost * if (foldlevel('.') > 0) | exe "norm! za" | en
+au BufReadPost * if (foldlevel('.') > 0) | exe 'norm! za' | en
 
 " New file netrw
 au BufNewFile * :Lexplore
@@ -159,7 +182,7 @@ let g:netrw_liststyle = 0
 let g:netrw_browse_split = 3
 
 " LaTeX
-let g:tex_flavor = "latex"
+let g:tex_flavor = 'latex'
 au FileType latex,tex,md,markdown setl spell spl=en_us tw=80
 
 " git
@@ -174,12 +197,14 @@ nn <space> za
 ino () ()<Left>
 ino [] []<Left>
 ino {} {}<Left>
+ino ... …
 ino <> <><Left>
 nn <leader>wp Vapgq
 nn <leader>wl gqq
 nn <leader>. dEi.<Esc>
 nn <leader>s i<space><Esc>
 nn <C-w>n :tabnew<CR>
+nn <C-w>t :tab ter<CR>
 nn <C-Left> :tabp<CR>
 nn <C-Right> :tabn<CR>
 ino {<CR> {<CR>}<Esc>ko<Tab>
@@ -187,12 +212,12 @@ ino <<CR> <<CR>><Esc>ko<Tab>
 ino (<CR> (<CR>)<Esc>ko<Tab>
 ino [<CR> [<CR>]<Esc>ko<Tab>
 vn <C-r> "ry:%s/<C-r>r//gc<C-f>3h<C-c>
-nn <leader>h :se hls! hls?<CR>:ec " Toggled hls."<CR>
-nn <leader>p :se paste! paste?<CR>:ec " Toggled paste."<CR>
+nn <leader>h :se hls! hls?<CR>:ec ' Toggled hls.'<CR>
+nn <leader>p :se paste! paste?<CR>:ec ' Toggled paste.'<CR>
 " Handy for re-formatting current paragraph with `column`.
 nn <leader>ct Vap : !column -te \| sed '/^\#/ s/ \{1,\}/ /g'<CR>
-no <silent><C-S> :update<CR>:ec " Saved '".expand('%:t')."'."<CR>
-nn <leader>t :%s/\s\+$//e<CR>:ec " Trimmed '".expand('%:t')."'."<CR>
+no <silent><C-S> :update<CR>:ec ' Saved '''.expand('%:t').'''.'<CR>
+" nn <leader>t :%s/\s\+$//e<CR>:ec ' Trimmed '''.expand('%:t').'''.'<CR>
 
 fu! Float(key) abort
   " Whilst the cursor is on a character which matches the character the
@@ -202,26 +227,26 @@ fu! Float(key) abort
   " check or anything. We currently only use it to float up/down a file.
   " let l:FC = 0
   let l:myChar = strcharpart(getline('.')[col('.') - 1:], 0, 1)
-  wh strlen(getline(".")) < col(".") ||
-    \ getline(".")[col(".") - 1] =~ l:myChar ||
-    \ getline(".")[col(".") - 1] =~ " "
+  wh strlen(getline('.')) < col('.') ||
+    \ getline('.')[col('.') - 1] =~ l:myChar ||
+    \ getline('.')[col('.') - 1] =~ ' '
 
     " Execute the key in normal mode.
     exe 'norm!' a:key
     " let FC = FC + 1
 
     " If at start/end of file, stop floating.
-    if line(".") == 1
-      echoh BoldHL | ec " ⚠ Top of file: can't float higher!" | echoh None
+    if line('.') == 1
+      echoh BoldHL | ec ' ⚠ Top of file: can''t float higher!' | echoh None
       brea
-    elsei line(".") == line("$")
-      echoh BoldHL | ec " ⚠ End of file: can't float lower!" | echoh None
+    elsei line('.') == line('$')
+      echoh BoldHL | ec ' ⚠ End of file: can''t float lower!' | echoh None
       brea
     en
 
     " Don't enter a loop on closed folds...
-    if foldclosed(".") > -1
-      echoh BoldHL | ec " ⚐ Not going into a fold." | echoh None
+    if foldclosed('.') > -1
+      echoh BoldHL | ec ' ⚐ Not going into a fold.' | echoh None
       brea
     en
 
@@ -251,14 +276,14 @@ endf
 
 fu! Fsz()
   let l:fs = getfsize(expand(@%))
-  if fs<0
+  if fs < 0
     retu printf('-')
-  elsei fs<1.0e3
+  elsei fs < 1.0e3
     retu printf('%ib',fs)
-  elsei  fs<1.0e6
-    retu printf('%.1gk',1.0e-3*fs)
+  elsei  fs < 1.0e6
+    retu printf('%.1gk', 1.0e-3 * fs)
   el
-    retu printf('%.1gm',1.0e-6*fs)
+    retu printf('%.1gm', 1.0e-6 * fs)
   en
 endf
 
@@ -274,11 +299,11 @@ endf
 
 " hi StatusLine ctermbg=3 ctermfg=187 " light
 hi StatusLine ctermbg=3 ctermfg=235 " dark
-hi finfo cterm=BOLD ctermbg=5 ctermfg=0
-hi sinfo cterm=BOLD ctermbg=6 ctermfg=0
-hi cinfo cterm=BOLD ctermbg=3 ctermfg=0
-hi linfo cterm=BOLD ctermbg=4 ctermfg=0
-hi pinfo cterm=BOLD ctermbg=2 ctermfg=0
+hi finfo cterm=NONE ctermbg=5 ctermfg=0
+hi sinfo cterm=NONE ctermbg=6 ctermfg=0
+hi cinfo cterm=NONE ctermbg=3 ctermfg=0
+hi linfo cterm=NONE ctermbg=4 ctermfg=0
+hi pinfo cterm=NONE ctermbg=2 ctermfg=0
 se stl=%#finfo#
 se stl+=\ %f%M%R\ %#sinfo#   " hl group for file
 se stl+=\ %{Fsz()}           " hl group for file size
@@ -290,4 +315,142 @@ se stl+=\%=
 se stl+=%#linfo#\ %{LinterStatus()}\ "    " lint info
 se stl+=%#cinfo#\ c%v\ "                  " hl group char count
 se stl+=%#pinfo#\ \%p%%\ "                " hl group progress through file
+" }}*
+
+" *{{ Startup Splash
+
+" *{{ StartMap
+fun! StartMap(Map)
+  if a:Map
+    " 'map' => set Start mode mappings
+    sil! setl ft=startup
+      \ bh=wipe
+      \ nobl
+      \ nocuc
+      \ nocul
+      \ nonu
+      \ nornu
+      \ nosc
+      \ nosmd
+      \ syn=OFF
+      \ t_ve=
+      \ gcr=a:xxx
+      \ ls=0
+      "\ statusline=\ [RJH\ Startup\ Tool]
+
+    nn <buffer><nowait><silent> i :enew <bar> startinsert<CR>
+    nn <buffer><nowait><silent> e :enew <bar><CR>
+    nn <buffer><nowait><silent> t :tabnew <bar> startinsert<CR>
+    nn <buffer><nowait><silent> y :tabnew <bar><CR>
+    nn <buffer><nowait><silent> q :exit<CR>
+
+    hi CColumn NONE
+    hi TrailSpaces NONE
+  el
+    " 'not map' => unmap
+    sil! setl
+      \ bh=
+      \ bl
+      \ cuc
+      \ cul
+      \ nu
+      \ rnu
+      \ sc
+      \ smd
+      \ syn=ON
+      \ t_ve=[?12;25h
+      \ gcr=
+      \ ls=2
+
+    " output of $(tput cvvis), counters $(tput civis)
+
+    hi CColumn ctermbg=1 ctermfg=0
+    hi TrailSpaces ctermbg=3
+  en
+endf
+
+" }}*
+
+" *{{ NotSplashing
+fun! NotSplashing()
+  " Don't run if:
+  " - commandline arguments, or
+  " - if start in insert mode, or
+  " - non-empty buffer, or
+  " - not invoked as vim or gvim
+  retu
+    \ argc()               ||
+    \ &insertmode          ||
+    \ line2byte('$') != -1 ||
+    \ v:progname !~? '^[-gmnq]\=vim\=x\=\%[\.exe]$'
+endf
+" }}*
+
+" *{{ Splash
+fun! Splash()
+
+    if NotSplashing() | retu | en
+
+    " Call buffer '[Startup]'; set ft; set maps
+    edit [Startup]
+    call StartMap(1)
+
+    let l:splash =
+      \ [
+      \   '╔═════════════════════════════════╗',
+      \   '║    ┏━┓╻ ╻┏━┓┏┓╻╻┏━┓   ╻ ╻╻┏┳┓   ║',
+      \   '║    ┣┳┛┗┳┛┣━┫┃┗┫ ┗━┓   ┃┏┛┃┃┃┃   ║',
+      \   '║    ╹┗╸ ╹ ╹ ╹╹ ╹ ┗━┛   ┗┛ ╹╹ ╹   ║',
+      \   '╠═════════════════════════════════╣',
+      \   '║   i) new buffer    insert mode  ║',
+      \   '║   e) new buffer    normal mode  ║',
+      \   '║   t) new tab buf   insert mode  ║',
+      \   '║   y) new tab buf   normal mode  ║',
+      \   '║   q) quit                       ║',
+      \   '╚═════════════════════════════════╝'
+      \ ]
+
+    " Centre the box print.
+    " Now we can just write to the buffer, whatever you want.
+
+    let l:boxlwidth = len(l:splash)
+    let l:boxhwidth = strdisplaywidth(l:splash[0])
+    " command line, statusline offset vertical count(s).
+    let l:boxloffset = (&lines - l:boxlwidth) / 2
+    let l:boxhoffset = (&columns - l:boxhwidth) / 2
+
+    let l:vtopbias = 4
+
+    call append('$', repeat([' '], l:boxloffset - l:vtopbias))
+    for line in l:splash
+      call append('$', repeat(' ', l:boxhoffset) . l:line)
+    endfor
+    call append('$', repeat([' '], &lines - l:boxlwidth - l:vtopbias - 4))
+
+    " Prevent modification(s).
+    setl nomod noma
+
+endf
+" }}*
+
+" On starts, call Splash().
+au VimEnter * call Splash()
+
+" On leaving the splash screen, reinstate globals.
+au FileType startup au BufLeave * call StartMap(0)
+" On return to the splash screen, reinstate buffer specifics.
+au FileType startup au BufEnter <buffer> call StartMap(1)
+
+" }}*
+
+" *{{ Folding
+se foldtext=FoldText()
+fu! FoldText()
+  let l:line = getline(v:foldstart)
+  let l:sub = substitute(l:line, '" .{{[ ]*', '', 'g')
+  let l:nlines = v:foldend - v:foldstart
+  let l:indent = repeat(' ', 2 * (v:foldlevel - 1))
+  retu $'{l:indent}* [ {l:sub} ] ({l:nlines} lines) ' . repeat(' ', &columns)
+endf
+
 " }}*

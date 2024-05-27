@@ -10,6 +10,7 @@ ifThenSource ~/.bin/.machine_specifics
 
 ifThenPath() { [ -d "$1" ] && export PATH="$1:$PATH" ;}
 ifThenPath ~/.bin
+#ifThenPath ~/.dotnet
 ifThenPath ~/.joplin
 ifThenPath ~/.scripts
 ifThenPath ~/.local/bin

@@ -140,3 +140,7 @@ send_to_phone() {
 send_to_tablet() {
   bt-obex -p 00:BB:1C:1A:7F:79 "${1}"
 }
+
+send_to_red() {
+  bt-obex -p 74:29:AF:7F:30:18 "${1}"
+}

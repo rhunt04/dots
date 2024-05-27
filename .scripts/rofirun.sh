@@ -27,20 +27,20 @@ handleArgs() {
 handleArgs "${@}"
 
 [[ -z $RUN && -z $WIN ]] && { echo "Error (neither arg supplied)"; exit 1; }
-[[ ! -z $RUN && ! -z $WIN ]] && { echo "Error (both args supplied)"; exit 1; }
+[[ -n $RUN && -n $WIN ]] && { echo "Error (both args supplied)"; exit 1; }
 
 # Get wal color variables.
 sc="${HOME}/.cache/wal/colors.sh"
 [ -s "${sc}" ] && source "${sc}"
 
 cmd="rofi -show"
-if [ ! -z "$RUN" ]; then
+if [ -n "$RUN" ]; then
 
   #echo "FILLING WITH RUN"
   cmd+=" run -location 6 -width 500 -yoffset -30 -lines 6"
   cmd+=" -display-run \"$ Run\""
 
-elif [ ! -z "$WIN" ]; then
+elif [ -n "$WIN" ]; then
 
   #echo "FILLING WITH WIN"
   # Count windows - dynamically size the rofi window to hold them.
