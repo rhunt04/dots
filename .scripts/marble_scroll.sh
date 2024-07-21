@@ -34,3 +34,18 @@ else
   exit 1
 
 fi
+
+
+# NB: xorg conf entry for making this automatic (in Debian-based distros I use) is below.
+# Named "50-marblemouse.conf" @ /usr/share/X11/xorg.conf.d on ega.
+#
+# FILE START:
+#
+# Section "InputClass"
+#     Identifier   "Marble Mouse"
+#     MatchProduct "Logitech USB Trackball"
+#     Driver       "libinput"
+#     Option       "ScrollMethod"          "button"
+#     Option       "ScrollButton"          "8"
+#     Option       "ButtonMapping"         "1 8 3 4 5 6 7 2 9"
+# EndSection
