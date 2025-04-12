@@ -3,7 +3,10 @@
 [[ $- != *i* ]] && return
 
 # if a file exists, source it
-ifThenSource() { [ -s "$1" ] && . "$1" ;}
+ifThenSource() {
+  # shellcheck disable=SC1090
+  [ -s "$1" ] && . "$1" ;
+}
 ifThenSource ~/.bin/.bash_aliases
 ifThenSource ~/.bin/.bash_functions
 ifThenSource ~/.bin/.machine_specifics
@@ -11,7 +14,6 @@ ifThenSource ~/.bin/.machine_specifics
 ifThenPath() { [ -d "$1" ] && export PATH="$1:$PATH" ;}
 ifThenPath ~/.bin
 #ifThenPath ~/.dotnet
-ifThenPath ~/.joplin
 ifThenPath ~/.scripts
 ifThenPath ~/.local/bin
 
@@ -20,10 +22,10 @@ bind "set show-all-if-ambiguous on"
 bind "set completion-ignore-case on"
 bind '"\e[B": history-search-forward'
 bind '"\e[A": history-search-backward'
+bind TAB:menu-complete
 
 # disable bash default C-S search (it's crap...)
 bind -r '\C-s'
-# turn off xon/xoff toggle.
 stty -ixon
 
 # shopts (check activity swith `shopt -p`)

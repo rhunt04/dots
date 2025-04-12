@@ -52,6 +52,7 @@ let g:ale_linters = {
   \ 'yaml': ['yamllint'],
   \ 'markdown': ['markdownlint', 'writegood', 'alex', 'proselint', 'cspell'],
   \ 'vim': ['vint', 'vimls', 'cspell'],
+  \ 'sh': ['shell', 'shellcheck'],
   \ 'bash': ['bash-language-server', 'shellcheck'],
   \ 'latex': ['lacheck'],
   \ 'docker': ['hadolint']
@@ -194,6 +195,7 @@ nn : ;
 nn ; :
 nn vw viw
 nn <space> za
+nn qq :qa<CR>
 ino () ()<Left>
 ino [] []<Left>
 ino {} {}<Left>
