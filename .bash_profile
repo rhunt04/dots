@@ -3,4 +3,5 @@
 export EDITOR=/usr/local/bin/vim
 export LESSHISTFILE=~/.local/.less_history
 
-[[ -f ~/.bashrc ]] && . ~/.bashrc
+. "$HOME/.atuin/bin/env"
+. "$HOME/.bashrc"

@@ -10,50 +10,52 @@ log() {
 
 backupImage() {
   # Check disk exists, check not mounted, check have space ...
-  sudo dd bs=4M if=/dev/mmcblk0 | gzip > /home/ryan/BackupImage`date +%d%m%y`.gz
+  sudo dd bs=4M if=/dev/mmcblk0 | gzip >/home/ryan/BackupImage$(date +%d%m%y).gz
 }
 
-function tarball() {
+tarball() {
   # Make a file or directory into a tarball.
 
-  [ $# -eq 0 ] && log "no arguments supplied." && return 1;
+  [ $# -eq 0 ] && log "no arguments supplied." && return 1
 
   # remove trailing slash (possible if directory fed in)
   for fdir in "${@%/}"; do
 
     # fdir is a directory or file?
     [[ ! -f "$fdir" ]] && [[ ! -d "$fdir" ]] &&
-    log "\"$fdir\" not file or directory." && continue;
+      log "\"$fdir\" not file or directory." && continue
 
-    tar -czvf "${fdir}.tgz" "$fdir";
+    tar -czvf "${fdir}.tgz" "$fdir"
 
   done
 
-  log "done tarring." && return 0;
+  log "done tarring." && return 0
 }
 
 extract() {
   # Extract a variety of archives.
-  [ $# -eq 0 ] && log "no arguments supplied." && return 1;
-  [ ! -f "$1" ] && log "file \"$1\" doesn't exist." && return 1;
+  [ $# -eq 0 ] && log "no arguments supplied." && return 1
+  [ ! -f "$1" ] && log "file \"$1\" doesn't exist." && return 1
 
   log "preparing $1."
   case $1 in
-    *.tgz | *.tar.gz)
-               tar xvzf "$1" 2>&1 ;;
-    *.tbz | *.tbz2 | *.tar.bz2)
-               tar xvjf "$1" 2>&1 ;;
-    *.gz)      gunzip   "$1" 2>&1 ;;
-    *.tar)     tar xvf  "$1" 2>&1 ;;
-    *.bz2)     bunzip2  "$1" 2>&1 ;;
-    *.rar)     unrar x  "$1" 2>&1 ;;
-    *.zip)     unzip    "$1" 2>&1 ;;
-    *.7z)      7z x     "$1" 2>&1 ;;
-    *.xz)      unxz     "$1" 2>&1 ;;
-    *.lzma)    unlmza   "$1" 2>&1 ;;
-    *) log "file \"$1\" is not valid." && return 1;
+  *.tgz | *.tar.gz)
+    tar xvzf "$1" 2>&1
+    ;;
+  *.tbz | *.tbz2 | *.tar.bz2)
+    tar xvjf "$1" 2>&1
+    ;;
+  *.gz) gunzip "$1" 2>&1 ;;
+  *.tar) tar xvf "$1" 2>&1 ;;
+  *.bz2) bunzip2 "$1" 2>&1 ;;
+  *.rar) unrar x "$1" 2>&1 ;;
+  *.zip) unzip "$1" 2>&1 ;;
+  *.7z) 7z x "$1" 2>&1 ;;
+  *.xz) unxz "$1" 2>&1 ;;
+  *.lzma) unlmza "$1" 2>&1 ;;
+  *) log "file \"$1\" is not valid." && return 1 ;;
   esac
-  log "done extracting $1." && return 0;
+  log "done extracting $1." && return 0
 
 }
 
@@ -65,11 +67,11 @@ cmkdir() {
 trimtrail() {
 
   # trim trailing space from a file.
-  [ $# -eq 0 ] && log "no arguments supplied." && return 1;
+  [ $# -eq 0 ] && log "no arguments supplied." && return 1
 
   # remove trailing slash (possible if directory fed in)
   for fdir in "${@%/}"; do
-    [[ ! -f "$fdir" ]] && log "\"$fdir\" not file." && continue;
+    [[ ! -f "$fdir" ]] && log "\"$fdir\" not file." && continue
     sed -i 's/[ \t]*$//' "${fdir}"
   done
 
@@ -95,10 +97,10 @@ myip() {
 boomerise() {
   #sed -E 's/(.)(.)?/\U\1\L\2/g' <<< $@
 
-  if (( $# == 0 )) ; then
-    sed -E 's/(.)(.)?/\U\1\L\2/g' < /dev/stdin
+  if (($# == 0)); then
+    sed -E 's/(.)(.)?/\U\1\L\2/g' </dev/stdin
   else
-    sed -E 's/(.)(.)?/\U\1\L\2/g' <<< "${@}"
+    sed -E 's/(.)(.)?/\U\1\L\2/g' <<<"${@}"
   fi
 }
 
@@ -115,15 +117,31 @@ epstopng() {
 
   epstopdf "${1}"
   base="${1%.*}"
-  pdftoppm "${base}.pdf" -png > "${base}.png"
+  pdftoppm "${base}.pdf" -png >"${base}.png"
   mogrify -trim -rotate 90 "${base}.png"
   rm "${1}" "${base}.pdf"
 
 }
 
-clear_clipboard () {
+clear_clipboard() {
   sleep "${1:-10}"
-  xclip -sel clip < /dev/null
+  xclip -sel clip </dev/null
+}
+
+c2f() {
+  [ ! -z "${1}" ] && xclip -o >"${1}" && log "copied to \"${1}\"."
+}
+
+rand_tldr() {
+  page=$(tldr --list | shuf -n 1)
+  figlet --gay -f smblock "  ${page}"
+  tldr "${page}"
+}
+
+rman() {
+  log "Opening random man page…"
+  choice=$(man -k . | awk '{print $1}' | sort -R | tail -1)
+  man "${choice}"
 }
 
 getpass() {

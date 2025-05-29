@@ -1,9 +1,10 @@
 # Generics
 text-width 80
+
 auto-reload yes
 reload-time 120
 confirm-exit no
-reload-threads 100
+reload-threads 10
 show-keymap-hint no
 cleanup-on-quit yes
 browser "xdg-open %u"
@@ -13,6 +14,9 @@ refresh-on-startup yes
 prepopulate-query-feeds yes
 display-article-progress yes
 feedhq-show-special-feeds no
+notify-always yes
+notify-program ~/.scripts/nb_notify.sh
+notify-format "Newsboat: finished reloading %d new articles~%f unread feeds (%n unread articles total)"
 
 # Article ignores (bit crude)
 ignore-article "*" "title =~ \"Sponsor\"
@@ -27,10 +31,10 @@ selecttag-title-format "Select Tag"
 selectfilter-title-format "Select Filter"
 searchresult-title-format "Search Results"
 
-articlelist-format " %-100t %> %T │ %D "
+articlelist-format " ├ %-100t %> %T │ %D "
 articlelist-title-format " %T - [%u/%t unread]"
 
-feedlist-format " %-20t %> %4U"
+feedlist-format " %-30t %> %4U"
 feedlist-title-format " Ryan's Feeds"
 
 # Colours
@@ -38,8 +42,8 @@ color info               blue default
 color article            default default
 color listfocus          white magenta
 color listfocus_unread   white magenta bold
-color listnormal         default default
-color listnormal_unread  default default bold
+color listnormal         color240 default
+color listnormal_unread  default default
 # color end-of-text-marker color3 default dim
 
 # Highlights
@@ -47,6 +51,10 @@ highlight article "http(s?)://[^ ]+" blue default bold
 highlight article "^(Feed|Title|Link|Date|Author):.*$" default default
 
 # Hacky way to create "section"
-highlight feedlist "^\ ┌" blue default
+highlight feedlist "^\ ╭►" blue default
+highlight feedlist "^\ ┌"  blue default
 highlight feedlist "^\ ├►" blue default
 highlight feedlist "^\ └►" blue default
+
+# Continue "section" in article list.
+highlight articlelist "^\ ├" blue default

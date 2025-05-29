@@ -15,12 +15,9 @@ tm="tmux"
 tmc="${HOME}/.config/tmux/.tmux.conf"
 [ -f "${tmc}" ] && tm="tmux -f ${tmc}"
 
-# Set colours regardless of attaching or creating the session.
-wseq="${HOME}/.cache/wal/sequences"
-[ -f "${wseq}" ] && cat "${wseq}"
-
 # If a tmux session "the_sesh" exists, attach to it. Otherwise, start it.
 if ! ${tm} attach -t "${session}"; then
   # The attach has failed - doesn't exist, let's create it.
+  #
   ${tm} new -s "${session}"
 fi

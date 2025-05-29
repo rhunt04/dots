@@ -1,11 +1,14 @@
 # Main page basic query feeds:
-"query:╭[  Σ Unread ]:     unread = \"yes\""
-"query:├►  News:           tags # \"nws\""
-"query:├►  Data Sci. / ML: tags # \"ds_ml\""
-"query:├►  Data Eng.:      tags # \"deng\""
-"query:├►  Science:        tags # \"sci\""
-"query:├►  Computing:      tags # \"com\""
-"query:└►  Misc.:          tags # \"msc\""
+
+
+"query:╭►  Σ Unread:              unread = \"yes\""
+"query:├►  News:                   tags # \"nws\""
+"query:├►  Data Science / ML:      tags # \"ds_ml\""
+"query:├►  Data Engineering:       tags # \"deng\""
+"query:├►  Science:                tags # \"sci\""
+"query:├►  Academia:               tags # \"aca\""
+"query:├►  Computing:              tags # \"com\""
+"query:└►  Miscellaneous:          tags # \"msc\""
 
 # Urls (named and sectioned):
 https://metro.co.uk/news/world/feed/                                  "!Metro"               "~Metro"               "nws"
@@ -20,8 +23,10 @@ https://news.mit.edu/rss/topic/machine-learning                       "!MIT_ML" 
 https://machinelearningmastery.com/blog/feed/                         "!ML_Mastery"          "~ML_Mastery"          "ds_ml"
 https://azurecomcdn.azureedge.net/blog/topics/machine-learning/feed/  "!Azure"               "~Azure"               "ds_ml"
 https://aws.amazon.com/blogs/machine-learning/feed/                   "!AWS"                 "~AWS"                 "ds_ml"
-https://medium.com/feed/tag/machine-learning                          "!Medium"              "~Medium"              "ds_ml"
+# Increasingly full of junk :-)
+# https://medium.com/feed/tag/machine-learning                          "!Medium"              "~Medium"              "ds_ml"
 https://blogs.cisco.com/tag/machine-learning/feed                     "!Cisco"               "~Cisco"               "ds_ml"
+https://vickiboykis.com/index.xml                                     "!Vicki_Boykis"        "~Vicki_Boykis"        "ds_ml"
 https://bair.berkeley.edu/blog/feed                                   "!Berkeley_AI"         "~Berkeley_AI"         "ds_ml"
 
 # Took articles out of this, could add again. I do read abstracts…
@@ -29,7 +34,7 @@ https://terrytao.wordpress.com/feed/                                  "!Terry_Ta
 https://thiscondensedlife.wordpress.com/feed/                         "!Condensed_Life"      "~Condensed_Life"      "sci"
 https://feeds.feedburner.com/PhysicsWorldNews?format=xml              "!Phys._World"         "~Phys._World"         "sci"
 https://condensedconcepts.blogspot.com/feeds/posts/default            "!Condensed_Concepts"  "~Condensed_Concepts"  "sci"
-https://blog.jupyter.org/feed                                         "!Jupyter"             "~Jupyter"             "com"    "ds_ml"
+https://rss.arxiv.org/rss/cond-mat/                                   "!arXiv_cond_mat"      "~arXiV_cond_mat"      "aca"
 https://stackabuse.com/rss/                                           "!Stackabuse"          "~Stackabuse"          "com"
 https://lukesmith.xyz/rss.xml                                         "!Luke_Smith"          "~Luke_Smith"          "com"
 https://newsboat.org/news.atom                                        "!Newsboat"            "~Newsboat"            "com"
@@ -38,12 +43,16 @@ https://feeds.feedburner.com/theendeavour                             "!John_D_C
 https://feeds.feedburner.com/WalkingRandomly                          "!Walking_Randomly"    "~Walking_Randomly"    "com"
 https://shape-of-code.coding-guidelines.com/feed/                     "!Shape_of_Code"       "~Shape_of_Code"       "com"
 https://ubuntu.com/blog/feed                                          "!Ubuntu"              "~Ubuntu"              "com"
+https://chollinger.com/blog/index.xml                                 "!CHollinger"          "~CHollinger"          "com"
+https://leahneukirchen.org/trivium/index.atom                         "!LNeukirchen"         "~LNeukirchen"         "com"
+https://atuin.sh/rss.xml                                              "!Atuin"               "~Atuin"               "com"
+https://hacks.mozilla.org                                             "!Mozilla"             "~Mozilla"             "com"
+https://blog.jupyter.org/feed                                         "!Jupyter"             "~Jupyter"             "com" "ds_ml"
+https://databricks.com/feed/                                          "!Databricks"          "~Databricks"          "com" "ds_ml" "deng"
 https://michaelrosenblog.blogspot.com/rss.xml                         "!Rosen"               "~Rosen"               "msc"
 https://thelearningprofessor.wordpress.com/feed/                      "!Learning_Prof"       "~Learning_Prof"       "msc"
 https://bills.parliament.uk/rss/allbills.rss                          "!Parliament_Bills"    "~Parliament_Bills"    "msc"
 https://theseattledataguy.com/feed                                    "!Seattle_Data_Guy"    "~Seattle_Data_Guy"    "deng"
-https://databricks.com/feed                                           "!Databricks"          "~Databricks"          "deng"
-https://techcommunity.microsoft.com/gxcuf89792/rss/board?board.id=AzureDataBlog "!Azure_Data_Blog"     "~Azure_Data_Blog"     "deng" "ds_ml" "com"
 https://www.dataschool.io/rss/                                        "!Data_School"         "~Data_School"         "deng"
 https://roundup.getdbt.com/feed/                                      "!Dbt"                 "~Dbt"                 "deng"
 http://feeds.feedburner.com/JamesSerra                                "!Serra"               "~Serra"               "deng"
@@ -51,7 +60,6 @@ https://pedram.substack.com/feed                                      "!Pedram" 
 http://www.gregreda.com/feeds/all.atom.xml                            "!Greg_Reda"           "~Greg_Reda"           "deng"
 https://jpmonteiro.substack.com/feed                                  "!Jp_Monteiro"         "~Jp_Monteiro"         "deng"
 https://www.confessionsofadataguy.com/feed/                           "!Confessions"         "~Confessions"         "deng"
-https://medium.com/feed/@dataengineeringweekly                        "!DEng_Weekly"         "~DEng_Weekly"         "deng"
 https://petrjanda.substack.com/feed                                   "!Petr_Janda"          "~Petr_Janda"          "deng"
 https://sarahsnewsletter.substack.com/feed                            "!Sarahs_Newsletter"   "~Sarahs_Newsletter"   "deng"
 https://newsletter.pragmaticengineer.com/feed                         "!Pragmatic_Engineer"  "~Pragmatic_Engineer"  "deng"
@@ -63,31 +71,15 @@ https://www.startdataengineering.com/index.xml                        "!Start_Da
 https://seattledataguy.substack.com/feed                              "!Seattle_Data_Guy_SS" "~Seattle_Data_Guy_SS" "deng"
 https://dataproducts.substack.com/feed                                "!Data_Products"       "~Data_Products"       "deng"
 https://blog.sqlauthority.com/feed/                                   "!SQL_Authority"       "~SQL_Authority"       "deng"
-
-# To be indexed:
-https://www.dataengineeringweekly.com/feed
-https://medium.com/feed/@maximebeauchemin
-https://www.data-is-plural.com/feed.xml
-https://davidsj.substack.com/feed
-https://kentgraziano.com/feed/
-https://fromanengineersight.substack.com/feed
-https://groupby1.substack.com/feed
-http://www.cathrinewilhelmsen.net/feed/
-https://www.eckerson.com/feed/
-https://joereis.substack.com/feed
-https://medium.com/feed/@laurengreerbalik
-https://www.winwithdata.io/feed
-https://letters.moderndatastack.xyz/rss/
-https://chollinger.com/blog/index.xml
-https://mehdio.substack.com/feed
-https://moderndata101.substack.com/feed
-https://agilebi.guru/feed/
-https://medium.com/feed/@karimjdda
-https://www.kahandatasolutions.com/blog.rss
-https://semanticinsight.wordpress.com/feed/
-http://www.tableausoftware.com/taxonomy/term/1920/feed
-https://dataespresso.substack.com/feed
-https://jonathanneo.substack.com/feed
-https://vickiboykis.com/index.xml
-https://ownyourdata.ai/wp/feed/
-https://www.blef.fr/blog/rss/
+https://www.dataengineeringweekly.com/feed                            "!DE_Weekly"           "~DE_Weekly"           "deng"
+https://www.blef.fr/blog/rss/                                         "!blef"                "~blef"                "deng"
+https://medium.com/feed/@maximebeauchemin                             "!MBeauchemin"         "~MBeauchemin"         "deng"
+http://www.cathrinewilhelmsen.net/feed/                               "!CWilhelmsen"         "~CWilhelmsen"         "deng"
+https://davidsj.substack.com/feed                                     "!DJayatillake"        "~DJayatillake"        "deng"
+https://www.kahandatasolutions.com/blog.rss                           "!KahanDS"             "~KahanDS"             "deng"
+https://fromanengineersight.substack.com/feed                         "!FromAnEng"           "~FromAnEng"           "deng"
+https://moderndata101.substack.com/feed                               "!ModernData101"       "~ModernData101"       "deng"
+https://joereis.substack.com/feed                                     "!JReis"               "~JReis"               "deng" "ds_ml"
+https://kentgraziano.com/feed/                                        "!KGraziano"           "~KGraziano"           "deng" "ds_ml"
+https://agilebi.guru/feed/                                            "!AgileBI"             "~AgileBI"             "deng" "ds_ml"
+https://techcommunity.microsoft.com/gxcuf89792/rss/board?board.id=AzureDataBlog "!Azure_Data_Blog"     "~Azure_Data_Blog"     "deng" "ds_ml" "com"

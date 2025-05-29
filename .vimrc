@@ -17,6 +17,11 @@ call plug#begin('~/.vim/plugged')
   Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
   Plug 'dense-analysis/ale'
   Plug 'voldikss/vim-floaterm'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
+  Plug 'tpope/vim-fugitive'
+  Plug 'dracula/vim', { 'as': 'dracula' }
+  Plug 'airblade/vim-gitgutter'
   "Plug 'ron89/thesaurus_query.vim'
   "Plug 'altercation/vim-colors-solarized'
 call plug#end()
@@ -52,7 +57,6 @@ let g:ale_linters = {
   \ 'yaml': ['yamllint'],
   \ 'markdown': ['markdownlint', 'writegood', 'alex', 'proselint', 'cspell'],
   \ 'vim': ['vint', 'vimls', 'cspell'],
-  \ 'sh': ['shell', 'shellcheck'],
   \ 'bash': ['bash-language-server', 'shellcheck'],
   \ 'latex': ['lacheck'],
   \ 'docker': ['hadolint']
@@ -60,7 +64,7 @@ let g:ale_linters = {
 
 let g:ale_fixers = {
 \  '*': ['remove_trailing_lines', 'trim_whitespace'],
-\  'python': ['isort']
+\  'python': ['isort', 'black']
 \}
 
 let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰']
@@ -77,12 +81,22 @@ tno <silent><C-h> <C-\><C-n>:FloatermToggle<CR>
 hi FloatermBorder ctermbg=0 ctermfg=2
 " }}*
 
+" *{{ FZF
+nn <silent><C-f> :FZF<CR>
+" }}*
+
+" *{{ GitGutter
+let g:gitgutter_sign_added = '+'
+let g:gitgutter_sign_modified = 'Δ'
+let g:gitgutter_sign_removed = '-'
+" }}*
+
 "let g:UltiSnipsExpandTrigger='<tab>'
 "let g:UltiSnipsJumpForwardTrigger='<tab>'
 "let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 
 " termguicolors + dracula.
-"se tgc
+" se tgc
 "let g:dracula_colorterm=0
 "colo dracula
 
@@ -158,6 +172,15 @@ hi CursorLine cterm=NONE ctermbg=235 " dark
 " hi TabLineSel cterm=BOLD ctermfg=2 ctermbg=187 " light
 hi TabLineSel cterm=BOLD ctermfg=2 ctermbg=235 " dark
 
+hi GitGutterAdd cterm=BOLD ctermfg=2
+hi GitGutterChange cterm=BOLD ctermfg=4
+hi GitGutterDelete cterm=BOLD ctermfg=1
+
+hi SpellBad cterm=underline ctermfg=NONE ctermbg=NONE
+hi SpellCap cterm=underline ctermfg=NONE ctermbg=NONE
+hi SpellRare cterm=underline ctermfg=NONE ctermbg=NONE
+hi SpellLocal cterm=underline ctermfg=NONE ctermbg=NONE
+
 hi TrailSpaces ctermbg=3
 mat TrailSpaces /\s\{1}$/ " highlight only last space.
 
@@ -194,8 +217,11 @@ au FileType gitcommit setl spell spl=en_us tw=80
 nn : ;
 nn ; :
 nn vw viw
+nn <Tab> >>
+vn <Tab> >gv
+nn <S-Tab> <<
+vn <S-Tab> <gv
 nn <space> za
-nn qq :qa<CR>
 ino () ()<Left>
 ino [] []<Left>
 ino {} {}<Left>
@@ -299,6 +325,28 @@ fu! LinterStatus() abort
   \ printf('%d⚠ %d⚐', all_errors, all_non_errors)
 endf
 
+fu! GitStatus()
+  let [a, m, r] = GitGutterGetHunkSummary()
+  let output = ''
+
+  if a > 0
+    let output .= '+' . a . ' '
+  en
+
+  if m > 0
+    let output .= 'Δ' . m . ' '
+  en
+
+  if r > 0
+    let output .= '-' . r . ' '
+  en
+
+  " Trim any trailing space
+  let output = trim(output)
+
+  retu output
+endf
+
 " hi StatusLine ctermbg=3 ctermfg=187 " light
 hi StatusLine ctermbg=3 ctermfg=235 " dark
 hi finfo cterm=NONE ctermbg=5 ctermfg=0
@@ -306,6 +354,7 @@ hi sinfo cterm=NONE ctermbg=6 ctermfg=0
 hi cinfo cterm=NONE ctermbg=3 ctermfg=0
 hi linfo cterm=NONE ctermbg=4 ctermfg=0
 hi pinfo cterm=NONE ctermbg=2 ctermfg=0
+hi ginfo cterm=NONE ctermbg=1 ctermfg=0
 se stl=%#finfo#
 se stl+=\ %f%M%R\ %#sinfo#   " hl group for file
 se stl+=\ %{Fsz()}           " hl group for file size
@@ -317,6 +366,7 @@ se stl+=\%=
 se stl+=%#linfo#\ %{LinterStatus()}\ "    " lint info
 se stl+=%#cinfo#\ c%v\ "                  " hl group char count
 se stl+=%#pinfo#\ \%p%%\ "                " hl group progress through file
+se stl+=%#ginfo#\%{GitStatus()}           " git info
 " }}*
 
 " *{{ Startup Splash
@@ -391,46 +441,46 @@ endf
 " *{{ Splash
 fun! Splash()
 
-    if NotSplashing() | retu | en
+  if NotSplashing() | retu | en
 
-    " Call buffer '[Startup]'; set ft; set maps
-    edit [Startup]
-    call StartMap(1)
+  " Call buffer '[Startup]'; set ft; set maps
+  edit [Startup]
+  call StartMap(1)
 
-    let l:splash =
-      \ [
-      \   '╔═════════════════════════════════╗',
-      \   '║    ┏━┓╻ ╻┏━┓┏┓╻╻┏━┓   ╻ ╻╻┏┳┓   ║',
-      \   '║    ┣┳┛┗┳┛┣━┫┃┗┫ ┗━┓   ┃┏┛┃┃┃┃   ║',
-      \   '║    ╹┗╸ ╹ ╹ ╹╹ ╹ ┗━┛   ┗┛ ╹╹ ╹   ║',
-      \   '╠═════════════════════════════════╣',
-      \   '║   i) new buffer    insert mode  ║',
-      \   '║   e) new buffer    normal mode  ║',
-      \   '║   t) new tab buf   insert mode  ║',
-      \   '║   y) new tab buf   normal mode  ║',
-      \   '║   q) quit                       ║',
-      \   '╚═════════════════════════════════╝'
-      \ ]
+  let l:splash =
+    \ [
+    \   '╔═════════════════════════════════╗',
+    \   '║    ┏━┓╻ ╻┏━┓┏┓╻╻┏━┓   ╻ ╻╻┏┳┓   ║',
+    \   '║    ┣┳┛┗┳┛┣━┫┃┗┫ ┗━┓   ┃┏┛┃┃┃┃   ║',
+    \   '║    ╹┗╸ ╹ ╹ ╹╹ ╹ ┗━┛   ┗┛ ╹╹ ╹   ║',
+    \   '╠═════════════════════════════════╣',
+    \   '║   i) new buffer    insert mode  ║',
+    \   '║   e) new buffer    normal mode  ║',
+    \   '║   t) new tab buf   insert mode  ║',
+    \   '║   y) new tab buf   normal mode  ║',
+    \   '║   q) quit                       ║',
+    \   '╚═════════════════════════════════╝'
+    \ ]
 
-    " Centre the box print.
-    " Now we can just write to the buffer, whatever you want.
+  " Centre the box print.
+  " Now we can just write to the buffer, whatever you want.
 
-    let l:boxlwidth = len(l:splash)
-    let l:boxhwidth = strdisplaywidth(l:splash[0])
-    " command line, statusline offset vertical count(s).
-    let l:boxloffset = (&lines - l:boxlwidth) / 2
-    let l:boxhoffset = (&columns - l:boxhwidth) / 2
+  let l:boxlwidth = len(l:splash)
+  let l:boxhwidth = strdisplaywidth(l:splash[0])
+  " command line, statusline offset vertical count(s).
+  let l:boxloffset = (&lines - l:boxlwidth) / 2
+  let l:boxhoffset = (&columns - l:boxhwidth) / 2
 
-    let l:vtopbias = 4
+  let l:vtopbias = 4
 
-    call append('$', repeat([' '], l:boxloffset - l:vtopbias))
-    for line in l:splash
-      call append('$', repeat(' ', l:boxhoffset) . l:line)
-    endfor
-    call append('$', repeat([' '], &lines - l:boxlwidth - l:vtopbias - 4))
+  call append('$', repeat([' '], l:boxloffset - l:vtopbias))
+  for line in l:splash
+    call append('$', repeat(' ', l:boxhoffset) . l:line)
+  endfor
+  call append('$', repeat([' '], &lines - l:boxlwidth - l:vtopbias - 4))
 
-    " Prevent modification(s).
-    setl nomod noma
+  " Prevent modification(s).
+  setl nomod noma
 
 endf
 " }}*
@@ -452,7 +502,6 @@ fu! FoldText()
   let l:sub = substitute(l:line, '" .{{[ ]*', '', 'g')
   let l:nlines = v:foldend - v:foldstart
   let l:indent = repeat(' ', 2 * (v:foldlevel - 1))
-  retu $'{l:indent}* [ {l:sub} ] ({l:nlines} lines) ' . repeat(' ', &columns)
+  retu $'{l:indent}~ [ {l:sub} ] ({l:nlines} lines) ' . repeat(' ', &columns)
 endf
-
 " }}*
