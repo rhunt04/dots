@@ -75,11 +75,19 @@ nn <silent> K :ALEDetail<CR>
 " }}*
 
 " *{{ Floaterm
-let g:floaterm_title=''
-let g:floaterm_borderchars='═║═║╔╗╝╚'
+hi FloatermBorder ctermfg=4
+
 nn <silent><C-h> :FloatermToggle<CR>
 tno <silent><C-h> <C-\><C-n>:FloatermToggle<CR>
-hi FloatermBorder ctermbg=0 ctermfg=2
+
+let g:floaterm_width=0.8
+let g:floaterm_height=0.5
+let g:floaterm_autoclose=2
+let g:floaterm_wintype='float'
+let g:floaterm_title=' ʕ•ᴥ•ʔ '
+let g:floaterm_position='bottom'
+let g:floaterm_titleposition='center'
+let g:floaterm_borderchars='═║═║╔╗╝╚'
 " }}*
 
 " *{{ FZF
