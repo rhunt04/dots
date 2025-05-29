@@ -20,8 +20,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
   Plug 'tpope/vim-fugitive'
-  Plug 'dracula/vim', { 'as': 'dracula' }
+  "Plug 'dracula/vim', { 'as': 'dracula' }
   Plug 'airblade/vim-gitgutter'
+  Plug 'zirrostig/vim-schlepp'
   "Plug 'ron89/thesaurus_query.vim'
   "Plug 'altercation/vim-colors-solarized'
 call plug#end()
@@ -89,6 +90,13 @@ nn <silent><C-f> :FZF<CR>
 let g:gitgutter_sign_added = '+'
 let g:gitgutter_sign_modified = 'Δ'
 let g:gitgutter_sign_removed = '-'
+" }}*
+
+" *{{ Schlepp
+vmap <unique> <C-up>    <Plug>SchleppUp
+vmap <unique> <C-down>  <Plug>SchleppDown
+vmap <unique> <C-left>  <Plug>SchleppLeft
+vmap <unique> <C-right> <Plug>SchleppRight
 " }}*
 
 "let g:UltiSnipsExpandTrigger='<tab>'
