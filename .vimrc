@@ -163,6 +163,7 @@ se shm+=I
 se sb spr
 se nu rnu
 se mouse=a
+se wop=pum
 se scl=number
 se fdm=marker
 se fmr=*{{,}}*
