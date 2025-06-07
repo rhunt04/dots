@@ -13,18 +13,19 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-  "Plug 'sirver/ultisnips'
   Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
   Plug 'dense-analysis/ale'
   Plug 'voldikss/vim-floaterm'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
   Plug 'tpope/vim-fugitive'
-  "Plug 'dracula/vim', { 'as': 'dracula' }
   Plug 'airblade/vim-gitgutter'
+  Plug 'zivyangll/git-blame.vim'
   Plug 'zirrostig/vim-schlepp'
+  "Plug 'sirver/ultisnips'
   "Plug 'ron89/thesaurus_query.vim'
   "Plug 'altercation/vim-colors-solarized'
+  "Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
 
 " *{{ ALE
