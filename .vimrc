@@ -13,15 +13,14 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-  Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
-  Plug 'dense-analysis/ale'
-  Plug 'voldikss/vim-floaterm'
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
+  Plug 'dense-analysis/ale'
   Plug 'tpope/vim-fugitive'
-  Plug 'airblade/vim-gitgutter'
-  Plug 'zivyangll/git-blame.vim'
+  Plug 'voldikss/vim-floaterm'
   Plug 'zirrostig/vim-schlepp'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'Exafunction/windsurf.vim', { 'branch': 'main' }
   "Plug 'sirver/ultisnips'
   "Plug 'ron89/thesaurus_query.vim'
   "Plug 'altercation/vim-colors-solarized'
@@ -61,12 +60,15 @@ let g:ale_linters = {
   \ 'vim': ['vint', 'vimls', 'cspell'],
   \ 'bash': ['bash-language-server', 'shellcheck'],
   \ 'latex': ['lacheck'],
-  \ 'docker': ['hadolint']
+  \ 'docker': ['hadolint'],
+  \ 'terraform': ['tflint', 'checkov', 'terraform'],
 \}
 
 let g:ale_fixers = {
-\  '*': ['remove_trailing_lines', 'trim_whitespace'],
-\  'python': ['isort', 'black']
+  \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \ 'python': ['isort', 'black'],
+  \ 'c': ['clang-format'],
+  \ 'terraform': ['terraform'],
 \}
 
 let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰']
@@ -106,6 +108,19 @@ vmap <unique> <C-up>    <Plug>SchleppUp
 vmap <unique> <C-down>  <Plug>SchleppDown
 vmap <unique> <C-left>  <Plug>SchleppLeft
 vmap <unique> <C-right> <Plug>SchleppRight
+" }}*
+
+" *{{ Codeium
+" Disable by default:
+let g:codeium_filetypes_disabled_by_default = v:true
+
+" enable for specific filetypes
+let g:codeium_filetypes = {
+\ 'bash': v:true,
+\ 'python': v:true,
+\ 'vim': v:true
+\ }
+
 " }}*
 
 "let g:UltiSnipsExpandTrigger='<tab>'
