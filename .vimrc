@@ -35,7 +35,7 @@ let g:ale_fix_on_save = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 1
 let g:ale_lint_on_insert_leave = 0
-let g:ale_lint_on_text_changed = 'never'
+"let g:ale_lint_on_text_changed = 'never'
 
 " Symbol definitions.
 let g:ale_sign_error = "⚠"
@@ -54,7 +54,7 @@ let g:ale_echo_msg_warning_str = 'Warning'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 let g:ale_linters = {
-  \ 'python': ['pylsp', 'flake8', 'bandit', 'pydocstyle'],
+  \ 'python': ['ruff', 'pylsp', 'bandit', 'pydocstyle'],
   \ 'yaml': ['yamllint'],
   \ 'markdown': ['markdownlint', 'writegood', 'alex', 'proselint', 'cspell'],
   \ 'vim': ['vint', 'vimls', 'cspell'],
@@ -71,7 +71,7 @@ let g:ale_fixers = {
   \ 'terraform': ['terraform'],
 \}
 
-let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰']
+let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰', '│', '─']
 
 nn <silent> H :ALEHover<CR>
 nn <silent> K :ALEDetail<CR>
@@ -279,6 +279,7 @@ nn <leader>p :se paste! paste?<CR>:ec ' Toggled paste.'<CR>
 nn <leader>ct Vap : !column -te \| sed '/^\#/ s/ \{1,\}/ /g'<CR>
 no <silent><C-S> :update<CR>:ec ' Saved '''.expand('%:t').'''.'<CR>
 " nn <leader>t :%s/\s\+$//e<CR>:ec ' Trimmed '''.expand('%:t').'''.'<CR>
+
 
 fu! Float(key) abort
   " Whilst the cursor is on a character which matches the character the
