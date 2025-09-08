@@ -55,6 +55,8 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 let g:ale_linters = {
   \ 'python': ['ruff', 'pylsp', 'bandit', 'pydocstyle'],
+  \ 'json': ['jq'],
+  \ 'xml': ['xmllint'],
   \ 'yaml': ['yamllint'],
   \ 'markdown': ['markdownlint', 'writegood', 'alex', 'proselint', 'cspell'],
   \ 'vim': ['vint', 'vimls', 'cspell'],
@@ -66,7 +68,9 @@ let g:ale_linters = {
 
 let g:ale_fixers = {
   \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-  \ 'python': ['isort', 'black'],
+  \ 'python': ['isort', 'ruff'],
+  \ 'json': ['jq'],
+  \ 'xml': ['xmllint'],
   \ 'c': ['clang-format'],
   \ 'terraform': ['terraform'],
 \}
