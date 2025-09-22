@@ -19,9 +19,19 @@ return {
   opts = {
     -- Define your formatters
     formatters_by_ft = {
+      c = { "clang-format" },
       lua = { "stylua" },
-      python = { "isort", "black" },
-      javascript = { "prettierd", "prettier", stop_after_first = true },
+      python = { "isort", "ruff_format" },
+      -- Stuff I don't touch much, but want to be pretty.
+      css = { "prettier" },
+      html = { "prettier" },
+      json = { "prettier" },
+      yaml = { "prettier" },
+      markdown = { "prettier" },
+      javascript = { "prettier" },
+      typescript = { "prettier" },
+      javascriptreact = { "prettier" },
+      typescriptreact = { "prettier" },
     },
     -- Set default options
     default_format_opts = {
@@ -31,6 +41,9 @@ return {
     formatters = {
       shfmt = {
         prepend_args = { "-i", "2" },
+      },
+      clang_format = {
+        prepend_args = { "--style=Chromium" },
       },
     },
   },

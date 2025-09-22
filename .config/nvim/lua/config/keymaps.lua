@@ -29,5 +29,5 @@ vim.api.nvim_set_keymap(
   "n",
   "<leader>wp",
   "Vgw",
-  { noremap = true, silent = false, desc = "Wrap the paragraph under cursor." }
+  { noremap = true, silent = false, desc = "Wrap the paragraph under cursor" }
 )
