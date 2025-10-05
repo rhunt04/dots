@@ -50,3 +50,6 @@ PROMPT_DIRTRIM=4
 export NVM_DIR="${HOME}/.nvm"
 ifThenSource "${NVM_DIR}"/nvm.sh
 ifThenSource "${NVM_DIR}"/bash_completion
+
+# Rust
+ifThenSource "~/.cargo/env"
