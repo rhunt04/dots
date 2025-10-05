@@ -42,7 +42,7 @@ cmd="rofi -show"
 if [ -n "$RUN" ]; then
 
   cmd+=" drun -location 6 -width 400 -yoffset -30 -lines 5"
-  cmd+=" -display-drun \"$ \" -show-icons"
+  cmd+=" -display-drun \"$ \" -show-icons -sort -levenshtein-sort"
 
 elif [ -n "$WIN" ]; then
 
@@ -54,7 +54,7 @@ fi
 
 # Colours, and misc identical conf.
 conf=" -padding 10 -font \"JetBrainsMono Nerd Font 12\" -separator-style none"
-conf+=" -hide-scrollbar -sort -levenshtein-sort -bw 2"
+conf+=" -hide-scrollbar -bw 2"
 
 cmd+=$conf
 eval "$cmd"

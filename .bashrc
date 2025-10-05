@@ -5,7 +5,7 @@
 # if a file exists, source it
 ifThenSource() {
   # shellcheck disable=SC1090
-  [ -s "$1" ] && . "$1";
+  [ -s "$1" ] && . "$1"
 }
 ifThenSource ~/.bin/.bash_aliases
 ifThenSource ~/.bin/.bash_functions

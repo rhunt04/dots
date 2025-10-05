@@ -30,7 +30,7 @@ alias gbl='git branch --list -a'
 alias tf="terraform"
 
 # Editing configs
-# alias vim='nvim'
+alias vim='nvim'
 alias vv='vim ~/.vimrc'
 alias vb='vim ~/.bashrc'
 alias sb='source ~/.bashrc'
