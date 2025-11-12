@@ -7,13 +7,14 @@ ifThenSource() {
   # shellcheck disable=SC1090
   [ -s "$1" ] && . "$1"
 }
+ifThenPath() { [ -d "$1" ] && export PATH="$1:$PATH"; }
+
 ifThenSource ~/.bin/.bash_aliases
 ifThenSource ~/.bin/.bash_functions
 ifThenSource ~/.bin/.machine_specifics
 ifThenSource /usr/share/bash-completion/bash_completion
 ifThenSource /usr/share/doc/fzf/examples/key-bindings.bash
 
-ifThenPath() { [ -d "$1" ] && export PATH="$1:$PATH"; }
 ifThenPath ~/.bin
 ifThenPath ~/.scripts
 ifThenPath ~/.local/bin
