@@ -8,6 +8,12 @@ log() {
   echo "[${FUNCNAME[1]}] $1"
 }
 
+left_right() {
+  printf "${1}"
+  printf " %.0s" $(seq 1 $(($(tput cols) - ${#1} - ${#2})))
+  printf "${2}\n"
+}
+
 backupImage() {
   # Check disk exists, check not mounted, check have space ...
   sudo dd bs=4M if=/dev/mmcblk0 | gzip >/home/ryan/BackupImage$(date +%d%m%y).gz
@@ -65,7 +71,6 @@ cmkdir() {
 }
 
 trimtrail() {
-
   # trim trailing space from a file.
   [ $# -eq 0 ] && log "no arguments supplied." && return 1
 
@@ -74,7 +79,6 @@ trimtrail() {
     [[ ! -f "$fdir" ]] && log "\"$fdir\" not file." && continue
     sed -i 's/[ \t]*$//' "${fdir}"
   done
-
 }
 
 mkmv() {
