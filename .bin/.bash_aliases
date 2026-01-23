@@ -3,7 +3,7 @@
 
 alias q='btop'
 alias top='btop'
-alias ls='eza'
+alias ls='eza --icons'
 alias ll='eza -lh --icons --no-user'
 alias lla='ll -a'
 alias nb='newsboat'
