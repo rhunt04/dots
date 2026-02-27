@@ -16,7 +16,7 @@ alias bc='bc -q -l ~/.bin/.bc_extensions'
 alias cat='batcat --style=full'
 alias diff='diff -y --suppress-common-lines --color=always'
 alias update='sudo apt-fast update && sudo apt-fast upgrade'
-alias sudo='sudo -p "$(tput setaf 3)[sudo] pwd → $(tput sgr0)"'
+alias sudo='__c=$((1+RANDOM%8)) && sudo -p "$(tput setaf $__c)[sudo] pwd → $(tput sgr0)"'
 
 alias xclip='xclip -selection c' # stupid xclip
 

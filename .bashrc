@@ -2,22 +2,22 @@
 
 [[ $- != *i* ]] && return
 
+ifThenPath() { [ -d "$1" ] && export PATH="$1:$PATH"; }
 # if a file exists, source it
 ifThenSource() {
   # shellcheck disable=SC1090
   [ -s "$1" ] && . "$1"
 }
-ifThenPath() { [ -d "$1" ] && export PATH="$1:$PATH"; }
+
+ifThenPath ~/.bin
+ifThenPath ~/.scripts
+ifThenPath ~/.local/bin
 
 ifThenSource ~/.bin/.bash_aliases
 ifThenSource ~/.bin/.bash_functions
 ifThenSource ~/.bin/.machine_specifics
 ifThenSource /usr/share/bash-completion/bash_completion
 ifThenSource /usr/share/doc/fzf/examples/key-bindings.bash
-
-ifThenPath ~/.bin
-ifThenPath ~/.scripts
-ifThenPath ~/.local/bin
 
 # bash binds
 bind TAB:menu-complete
