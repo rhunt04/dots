@@ -5,7 +5,10 @@ return {
     opts = function()
       return {
         options = {
-          theme = "dracula-nvim",
+          theme = vim.fn.filereadable(vim.env.HOME .. "/.config/lightmode")
+                == 1
+              and "solarized"
+            or "dracula-nvim",
         },
       }
     end,
