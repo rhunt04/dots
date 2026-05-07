@@ -166,12 +166,12 @@ hi! Pmenu cterm=NONE
 " }}*
 
 " *{{ Sets
-se ml
 se sms
 se cul
 syn on
 se acd
 se bs=2
+se noml
 se gcr=
 se wmnu
 se nohls
