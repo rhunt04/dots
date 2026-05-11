@@ -22,6 +22,7 @@ alias xclip='xclip -selection c' # stupid xclip
 
 # Git
 alias gs='git status -sb' # who uses ghostscript ...
+alias gd='git diff'
 alias gc='git commit -a'
 alias gl='git log --oneline'
 alias gbl='git branch --list -a'

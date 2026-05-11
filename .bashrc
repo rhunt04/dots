@@ -39,7 +39,7 @@ shopt -s histappend
 export EDITOR=/usr/local/bin/vim
 export HISTCONTROL=ignoreboth:erasedups
 export LESSHISTFILE=~/.local/.less_history
-export FZF_DEFAULT_OPTS="--border='double' --color 'fg+:2,bg+:-1'"
+export FZF_DEFAULT_OPTS="--border='double' --header='(C-c or Esc to quit)' --color='fg+:2,bg+:-1' --pointer='→' --prompt='$ '"
 
 # PS1
 git_ps1() { bn=$(git symbolic-ref --short -q HEAD 2>/dev/null) &&
